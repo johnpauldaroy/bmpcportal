@@ -32,6 +32,8 @@ services:
       JWT_EXP: ${JWT_EXPIRY}
     volumes:
       - db-data:/var/lib/postgresql/data
+    networks:
+      - internal
     # Exposed only on localhost so you can run psql/apply-migrations from the host
     # without opening the DB to the internet. Dokploy networking reaches it by name.
     ports:
@@ -66,6 +68,8 @@ services:
       GOTRUE_SMTP_PASS: ${SMTP_PASSWORD}
       GOTRUE_SMTP_ADMIN_EMAIL: ${SMTP_ADMIN_EMAIL}
       GOTRUE_SMTP_SENDER_NAME: ${SMTP_SENDER_NAME}
+    networks:
+      - internal
 
   rest:
     image: postgrest/postgrest:v12.2.3
@@ -81,6 +85,8 @@ services:
       PGRST_DB_USE_LEGACY_GUCS: "false"
       PGRST_APP_SETTINGS_JWT_SECRET: ${JWT_SECRET}
       PGRST_APP_SETTINGS_JWT_EXP: ${JWT_EXPIRY}
+    networks:
+      - internal
 
   storage:
     image: supabase/storage-api:v1.11.13
@@ -104,6 +110,8 @@ services:
       GLOBAL_S3_BUCKET: stub
     volumes:
       - storage-data:/var/lib/storage
+    networks:
+      - internal
 
   # Kong is the public gateway: it maps /auth, /rest, /storage to the services
   # above and is the single URL the app talks to (NEXT_PUBLIC_SUPABASE_URL).
@@ -125,9 +133,18 @@ services:
       SUPABASE_SERVICE_KEY: ${SERVICE_ROLE_KEY}
     volumes:
       - ./kong.yml:/home/kong/kong.yml:ro
+    networks:
+      - internal
     # Dokploy will reverse-proxy your domain to this port and terminate TLS.
     ports:
       - "8000:8000"
+
+networks:
+  # Explicit shared bridge so Kong resolves auth/rest/storage/db by service name.
+  # Without this, Dokploy attaches an extra ingress network and Kong's DNS
+  # resolver can query the wrong scope, causing "name resolution failed".
+  internal:
+    driver: bridge
 
 volumes:
   db-data:
