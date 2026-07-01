@@ -7,8 +7,8 @@ export default function manifest(): MetadataRoute.Manifest {
     description: "Member and admin portal for Barbaza Multi-Purpose Cooperative.",
     start_url: "/member",
     display: "standalone",
-    background_color: "#f7f9fb",
-    theme_color: "#136f63",
+    background_color: "#F8FAFC",
+    theme_color: "#3673FC",
     icons: [
       {
         src: "/icons/icon-192.svg",

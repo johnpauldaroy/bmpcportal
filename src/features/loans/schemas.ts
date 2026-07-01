@@ -62,17 +62,20 @@ const coMakerInviteSchema = z.object({
   email: z.string().trim().email().max(160)
 });
 
+// Keep in sync with MAX_FILE_BYTES in the upload forms/routes (2MB).
+const MAX_ATTACHMENT_BYTES = 2 * 1024 * 1024;
+
 const attachmentSchema = z.object({
   kind: z.string().min(1).max(60),
   bucketId: z.string().min(1).max(80).default("loan-attachments"),
   storagePath: z.string().min(1).max(400),
   fileName: optionalText(255),
   contentType: optionalText(120),
-  byteSize: z.coerce.number().int().nonnegative().optional()
+  byteSize: z.coerce.number().int().nonnegative().max(MAX_ATTACHMENT_BYTES).optional()
 });
 
 // What a co-maker submits through their own link: the self-fill person block
-// (no name fields — those came from the applicant) plus their attachments.
+// (no name fields - those came from the applicant) plus their attachments.
 export const coMakerCompletionSchema = z.object({
   presentAddress: requiredText(200),
   permanentAddress: requiredText(200),
@@ -156,6 +159,53 @@ export const loanReviewSchema = z.object({
   status: reviewableLoanStatusSchema,
   note: z.string().max(1000).optional().default("")
 });
+
+// ===== Loan agreement (disclosure / discount / promissory terms) =====
+
+const otherDeductionSchema = z.object({
+  label: z.string().trim().max(120),
+  amount: z.coerce.number().nonnegative()
+});
+
+// What staff fill in to prepare + send the agreement to the maker.
+export const loanAgreementTermsSchema = z.object({
+  amountOfLoan: z.coerce.number().positive(),
+  loanRetentionPercent: z.coerce.number().nonnegative().max(100).optional(),
+  loanRetentionAmount: z.coerce.number().nonnegative().optional(),
+  serviceFeePercent: z.coerce.number().nonnegative().max(100).optional(),
+  serviceFeeAmount: z.coerce.number().nonnegative().optional(),
+  filingFee: z.coerce.number().nonnegative().default(30),
+  otherDeductions: z.array(otherDeductionSchema).max(10).default([]),
+  totalDeduction: z.coerce.number().nonnegative().optional(),
+  netLoanProceeds: z.coerce.number().nonnegative().optional(),
+  typeOfLoan: optionalText(160),
+  purposeOfLoan: optionalText(200),
+  termMonths: z.coerce.number().int().positive().optional(),
+  interestRatePercent: z.coerce.number().nonnegative().optional(),
+  security: optionalText(200),
+  monthlyAmortization: z.coerce.number().nonnegative().optional(),
+  loanDate: z.string().date().optional().or(z.literal("")),
+  maturityDate: z.string().date().optional().or(z.literal("")),
+  firstPaymentDue: z.string().date().optional().or(z.literal("")),
+  amortBreakdown: z
+    .object({
+      loanAmortization: z.coerce.number().nonnegative().optional(),
+      interest: z.coerce.number().nonnegative().optional(),
+      fines: z.coerce.number().nonnegative().optional(),
+      capitalBuildUp: z.coerce.number().nonnegative().optional(),
+      savingsDeposit: z.coerce.number().nonnegative().optional()
+    })
+    .default({})
+});
+
+// What the maker submits to accept the agreement.
+export const loanAgreementAcceptanceSchema = z.object({
+  acknowledged: z.literal(true),
+  signature: attachmentSchema.optional()
+});
+
+export type LoanAgreementTermsInput = z.infer<typeof loanAgreementTermsSchema>;
+export type LoanAgreementAcceptanceInput = z.infer<typeof loanAgreementAcceptanceSchema>;
 
 export type LoanApplicationInput = z.infer<typeof loanApplicationSchema>;
 export type CoMakerCompletionInput = z.infer<typeof coMakerCompletionSchema>;

@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Bell, ChevronDown, LogOut, Settings, ShieldCheck, User } from "lucide-react";
+import { Bell, ChevronDown, LogOut, Settings, ShieldCheck, User } from "@/components/ui/icon";
 import { Sidebar } from "@/components/sidebar";
 import { createClient } from "@/lib/supabase/browser";
 
@@ -39,30 +39,30 @@ export function ShellLayout({ children, variant }: ShellLayoutProps) {
   }
 
   return (
-    <div className="min-h-screen bg-[#f0f4f8]">
+    <div className="min-h-screen bg-[#F1F5F9]">
       {hasSidebar && (
         <Sidebar variant={variant} collapsed={collapsed} onCollapse={setCollapsed} />
       )}
 
       <div className={hasSidebar ? `transition-all duration-300 ${collapsed ? "lg:pl-[68px]" : "lg:pl-60"}` : ""}>
         {/* Top bar */}
-        <header className="sticky top-0 z-20 flex items-center justify-between border-b border-[#d8e1ea] bg-white px-4 py-2.5 shadow-sm sm:px-6">
+        <header className="sticky top-0 z-20 flex items-center justify-between border-b border-[#E2E8F0] bg-white px-4 py-2.5 shadow-sm sm:px-6">
 
           {/* Left: logo */}
           <div className="flex items-center gap-3">
             {!hasSidebar && (
               <Link href="/member" className="flex items-center gap-2.5" style={{ textDecoration: "none" }}>
-                <span className="grid size-8 place-items-center rounded-lg shadow-sm" style={{ background: "#d99b2b", color: "#fff" }}>
+                <span className="grid size-8 place-items-center rounded-lg shadow-sm" style={{ background: "#1F52F1", color: "#fff" }}>
                   <ShieldCheck size={16} />
                 </span>
-                <span className="hidden text-sm font-bold text-[#10233f] sm:block">BMPC Portal</span>
+                <span className="hidden text-sm font-bold text-[#0F172A] sm:block">BMPC Portal</span>
               </Link>
             )}
           </div>
 
           {/* Center: label */}
-          <div className="flex items-center gap-2 text-sm text-[#5f6c7b]">
-            <span className="font-medium text-[#10233f]">
+          <div className="flex items-center gap-2 text-sm text-[#475569]">
+            <span className="font-medium text-[#0F172A]">
               {variant === "admin" ? "Admin Panel" : "Member Portal"}
             </span>
             <span className="hidden sm:inline">·</span>
@@ -74,15 +74,15 @@ export function ShellLayout({ children, variant }: ShellLayoutProps) {
 
             {/* Notification bell */}
             <button
-              className="relative rounded-lg p-2 transition-colors hover:bg-[#f0f4f8]"
-              style={{ color: "#5f6c7b" }}
+              className="relative rounded-lg p-2 transition-colors hover:bg-[#F1F5F9]"
+              style={{ color: "#475569" }}
               aria-label="Notifications"
             >
               <Bell size={18} />
               {hasNotifications && (
                 <span
                   className="absolute right-1.5 top-1.5 size-2 rounded-full"
-                  style={{ background: "#d99b2b" }}
+                  style={{ background: "#1F52F1" }}
                 />
               )}
             </button>
@@ -91,13 +91,13 @@ export function ShellLayout({ children, variant }: ShellLayoutProps) {
             <div className="relative" ref={dropdownRef}>
               <button
                 onClick={() => setProfileOpen((v) => !v)}
-                className="flex items-center gap-2 rounded-lg px-2 py-1.5 transition-colors hover:bg-[#f0f4f8]"
-                style={{ color: "#344456" }}
+                className="flex items-center gap-2 rounded-lg px-2 py-1.5 transition-colors hover:bg-[#F1F5F9]"
+                style={{ color: "#334155" }}
               >
                 {/* Avatar circle */}
                 <span
                   className="grid size-8 place-items-center rounded-full text-xs font-bold"
-                  style={{ background: "#0f2744", color: "#fff" }}
+                  style={{ background: "#1B308D", color: "#fff" }}
                 >
                   {variant === "admin" ? "A" : "M"}
                 </span>
@@ -107,7 +107,7 @@ export function ShellLayout({ children, variant }: ShellLayoutProps) {
                 <ChevronDown
                   size={14}
                   style={{
-                    color: "#8a99a8",
+                    color: "#94A3B8",
                     transform: profileOpen ? "rotate(180deg)" : "rotate(0deg)",
                     transition: "transform 0.2s"
                   }}
@@ -118,14 +118,14 @@ export function ShellLayout({ children, variant }: ShellLayoutProps) {
               {profileOpen && (
                 <div
                   className="absolute right-0 top-full mt-2 w-52 rounded-xl border py-1 shadow-xl"
-                  style={{ background: "#fff", borderColor: "#e1e8ef", zIndex: 50 }}
+                  style={{ background: "#fff", borderColor: "#E2E8F0", zIndex: 50 }}
                 >
                   {/* User info */}
-                  <div className="border-b px-4 py-3" style={{ borderColor: "#f0f4f8" }}>
-                    <p className="text-xs font-semibold text-[#10233f]">
+                  <div className="border-b px-4 py-3" style={{ borderColor: "#F1F5F9" }}>
+                    <p className="text-xs font-semibold text-[#0F172A]">
                       {variant === "admin" ? "Admin Account" : "Member Account"}
                     </p>
-                    <p className="mt-0.5 text-xs text-[#8a99a8]">
+                    <p className="mt-0.5 text-xs text-[#94A3B8]">
                       {variant === "admin" ? "admin@barbazampc.coop" : "member@barbazampc.coop"}
                     </p>
                   </div>
@@ -135,25 +135,25 @@ export function ShellLayout({ children, variant }: ShellLayoutProps) {
                     <Link
                       href={variant === "admin" ? "/admin" : "/member"}
                       onClick={() => setProfileOpen(false)}
-                      className="flex items-center gap-3 px-4 py-2 text-sm transition-colors hover:bg-[#f0f4f8]"
-                      style={{ color: "#344456", textDecoration: "none" }}
+                      className="flex items-center gap-3 px-4 py-2 text-sm transition-colors hover:bg-[#F1F5F9]"
+                      style={{ color: "#334155", textDecoration: "none" }}
                     >
-                      <User size={15} style={{ color: "#8a99a8" }} />
+                      <User size={15} style={{ color: "#94A3B8" }} />
                       My Profile
                     </Link>
                     <Link
                       href={variant === "admin" ? "/admin" : "/member"}
                       onClick={() => setProfileOpen(false)}
-                      className="flex items-center gap-3 px-4 py-2 text-sm transition-colors hover:bg-[#f0f4f8]"
-                      style={{ color: "#344456", textDecoration: "none" }}
+                      className="flex items-center gap-3 px-4 py-2 text-sm transition-colors hover:bg-[#F1F5F9]"
+                      style={{ color: "#334155", textDecoration: "none" }}
                     >
-                      <Settings size={15} style={{ color: "#8a99a8" }} />
+                      <Settings size={15} style={{ color: "#94A3B8" }} />
                       Settings
                     </Link>
                   </div>
 
                   {/* Sign out */}
-                  <div className="border-t py-1" style={{ borderColor: "#f0f4f8" }}>
+                  <div className="border-t py-1" style={{ borderColor: "#F1F5F9" }}>
                     <button
                       onClick={() => { setProfileOpen(false); handleSignOut(); }}
                       className="flex w-full items-center gap-3 px-4 py-2 text-sm transition-colors hover:bg-[#fef2f2]"

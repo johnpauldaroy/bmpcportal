@@ -1,0 +1,356 @@
+{
+  "pageHeight": 936,
+  "blockOffset": 224.5,
+  "page1": {
+    "terms": {
+      "amountInWords": [
+        222,
+        790
+      ],
+      "amountRequested": [
+        482,
+        790
+      ],
+      "preferredTermMonths": [
+        114,
+        779
+      ],
+      "firstPaymentDue": [
+        366,
+        779
+      ],
+      "purpose": [
+        294,
+        760
+      ]
+    },
+    "applicant": {
+      "firstName": [
+        89,
+        686
+      ],
+      "lastName": [
+        271,
+        686
+      ],
+      "middleName": [
+        463,
+        686
+      ],
+      "occupation": [
+        97,
+        672
+      ],
+      "monthlySalary": [
+        364,
+        672
+      ],
+      "totalMonthlyIncome": [
+        223,
+        645
+      ],
+      "civilStatus": [
+        342,
+        645.5
+      ],
+      "spouseName": [
+        104,
+        632
+      ],
+      "noOfDependents": [
+        387,
+        632
+      ],
+      "spouseEmployer": [
+        122,
+        618
+      ],
+      "spouseMonthlySalary": [
+        394,
+        618
+      ],
+      "presentAddress": [
+        110,
+        605
+      ],
+      "permanentAddress": [
+        383,
+        605
+      ],
+      "phoneNo": [
+        161,
+        591
+      ],
+      "email": [
+        361,
+        591
+      ],
+      "taxIdentificationNumber": [
+        149,
+        353
+      ],
+      "validId": [
+        375,
+        578
+      ],
+      "idNumber": [
+        527,
+        578
+      ],
+      "shareCapital": [
+        151,
+        564
+      ]
+    },
+    "coMaker1": {
+      "firstName": [
+        89,
+        461.5
+      ],
+      "lastName": [
+        271,
+        461.5
+      ],
+      "middleName": [
+        463,
+        461.5
+      ],
+      "occupation": [
+        97,
+        447.5
+      ],
+      "monthlySalary": [
+        364,
+        447.5
+      ],
+      "totalMonthlyIncome": [
+        223,
+        420.5
+      ],
+      "civilStatus": [
+        342,
+        421
+      ],
+      "spouseName": [
+        104,
+        407.5
+      ],
+      "noOfDependents": [
+        387,
+        407.5
+      ],
+      "spouseEmployer": [
+        122,
+        393.5
+      ],
+      "spouseMonthlySalary": [
+        394,
+        393.5
+      ],
+      "presentAddress": [
+        110,
+        380.5
+      ],
+      "permanentAddress": [
+        383,
+        380.5
+      ],
+      "phoneNo": [
+        161,
+        366.5
+      ],
+      "email": [
+        361,
+        366.5
+      ],
+      "taxIdentificationNumber": [
+        149,
+        128.5
+      ],
+      "validId": [
+        375,
+        353.5
+      ],
+      "idNumber": [
+        527,
+        353.5
+      ],
+      "shareCapital": [
+        151,
+        339.5
+      ]
+    },
+    "coMaker2": {
+      "firstName": [
+        89,
+        237
+      ],
+      "lastName": [
+        271,
+        237
+      ],
+      "middleName": [
+        463,
+        237
+      ],
+      "occupation": [
+        97,
+        223
+      ],
+      "monthlySalary": [
+        364,
+        223
+      ],
+      "totalMonthlyIncome": [
+        223,
+        196
+      ],
+      "civilStatus": [
+        342,
+        196.5
+      ],
+      "spouseName": [
+        104,
+        183
+      ],
+      "noOfDependents": [
+        387,
+        183
+      ],
+      "spouseEmployer": [
+        122,
+        169
+      ],
+      "spouseMonthlySalary": [
+        394,
+        169
+      ],
+      "presentAddress": [
+        110,
+        156
+      ],
+      "permanentAddress": [
+        383,
+        156
+      ],
+      "phoneNo": [
+        161,
+        142
+      ],
+      "email": [
+        361,
+        142
+      ],
+      "taxIdentificationNumber": [
+        149,
+        -96
+      ],
+      "validId": [
+        375,
+        129
+      ],
+      "idNumber": [
+        527,
+        129
+      ],
+      "shareCapital": [
+        151,
+        115
+      ]
+    },
+    "loanTypeCheckboxes": {
+      "multi_purpose": [
+        117,
+        846
+      ],
+      "salary": [
+        224,
+        846
+      ],
+      "faxcom": [
+        302,
+        846
+      ],
+      "honorarium": [
+        392,
+        846
+      ],
+      "medap": [
+        491,
+        846
+      ],
+      "pension": [
+        117,
+        826
+      ],
+      "bacap": [
+        195,
+        826
+      ],
+      "enhanced_educational": [
+        256,
+        826
+      ],
+      "clap": [
+        400,
+        826
+      ],
+      "others": [
+        457,
+        826
+      ]
+    },
+    "securityCheckboxes": {
+      "savings_time_deposits": [
+        125,
+        738
+      ],
+      "real_estate": [
+        242,
+        738
+      ],
+      "chattel": [
+        327,
+        738
+      ],
+      "jewelry": [
+        405,
+        738
+      ],
+      "none": [
+        483,
+        738
+      ]
+    },
+    "employmentCheckboxes": {
+      "permanent": [
+        352,
+        658
+      ],
+      "contractual": [
+        419,
+        658
+      ],
+      "temporary": [
+        490,
+        658
+      ]
+    }
+  },
+  "page2": {
+    "sig": {
+      "memberBorrowerName": [
+        49,
+        750
+      ],
+      "coMaker1Name": [
+        65,
+        710
+      ],
+      "coMaker2Name": [
+        65,
+        668
+      ]
+    }
+  }
+}

@@ -30,34 +30,34 @@ export default async function CertificatesPage() {
           {certificates.map((certificate) => (
             <article
               key={certificate.id}
-              className="rounded-lg border border-[#d8e1ea] bg-white p-5 shadow-sm"
+              className="rounded-xl border border-[#E2E8F0] bg-white p-5 md-elevation-1"
             >
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div>
                   <StatusBadge tone={statusTone(certificate.status)}>
                     {certificate.status}
                   </StatusBadge>
-                  <h2 className="mt-3 text-lg font-semibold text-[#10233f]">
+                  <h2 className="mt-3 text-lg font-semibold text-[#0F172A]">
                     {certificate.certificate_number}
                   </h2>
-                  <p className="mt-1 text-sm text-[#5f6c7b]">
+                  <p className="mt-1 text-sm text-[#475569]">
                     Threshold #{certificate.threshold_number}
                   </p>
                 </div>
-                <p className="text-lg font-semibold text-[#10233f]">
+                <p className="text-lg font-semibold text-[#0F172A]">
                   {formatPeso(certificate.share_capital_amount)}
                 </p>
               </div>
-              <dl className="mt-4 grid gap-3 rounded-md border border-[#e1e8ef] bg-[#f8fafc] p-3 text-sm sm:grid-cols-2">
+              <dl className="mt-4 grid gap-3 rounded-md border border-[#E2E8F0] bg-[#F8FAFC] p-3 text-sm sm:grid-cols-2">
                 <div>
-                  <dt className="font-semibold text-[#344456]">Issued</dt>
-                  <dd className="mt-1 text-[#5f6c7b]">
+                  <dt className="font-semibold text-[#334155]">Issued</dt>
+                  <dd className="mt-1 text-[#475569]">
                     {formatDate(certificate.issued_at)}
                   </dd>
                 </div>
                 <div>
-                  <dt className="font-semibold text-[#344456]">File</dt>
-                  <dd className="mt-1 text-[#5f6c7b]">
+                  <dt className="font-semibold text-[#334155]">File</dt>
+                  <dd className="mt-1 text-[#475569]">
                     {certificate.storage_path ? "Available privately" : "Pending generation"}
                   </dd>
                 </div>

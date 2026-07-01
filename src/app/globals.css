@@ -1,16 +1,37 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f7f9fb;
-  --foreground: #14213d;
-  --muted: #5f6c7b;
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  --muted: #94a3b8;
+  --body: #475569;
   --surface: #ffffff;
-  --surface-strong: #edf3f8;
-  --border: #d8e1ea;
-  --primary: #136f63;
-  --primary-strong: #0b4f47;
-  --accent: #d99b2b;
+  --surface-strong: #f1f5f9;
+  --secondary: #f1f5f9;
+  --border: #e2e8f0;
+  --primary: #3673fc;
+  --primary-strong: #1f52f1;
+  --accent: #1f52f1;
   --danger: #b42318;
+
+  /* ===== Material Design tokens ===== */
+  /* Shape (Material rounded corner scale) */
+  --md-radius-sm: 8px;
+  --md-radius: 12px;
+  --md-radius-lg: 16px;
+  --md-radius-xl: 28px;
+  --md-radius-full: 9999px;
+
+  /* Elevation (Material dp shadows) */
+  --md-elevation-1: 0 1px 2px rgba(15, 23, 42, 0.06), 0 1px 3px rgba(15, 23, 42, 0.10);
+  --md-elevation-2: 0 1px 5px rgba(15, 23, 42, 0.08), 0 2px 6px rgba(15, 23, 42, 0.10);
+  --md-elevation-3: 0 4px 8px rgba(15, 23, 42, 0.10), 0 1px 10px rgba(15, 23, 42, 0.08);
+  --md-elevation-4: 0 6px 10px rgba(15, 23, 42, 0.12), 0 2px 14px rgba(15, 23, 42, 0.10);
+
+  /* Motion (Material standard easing & durations) */
+  --md-ease-standard: cubic-bezier(0.2, 0, 0, 1);
+  --md-ease-emphasized: cubic-bezier(0.2, 0, 0, 1);
+  --md-duration: 200ms;
 }
 
 * {
@@ -26,7 +47,11 @@ body {
   margin: 0;
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-roboto), Roboto, "Segoe UI", system-ui, -apple-system,
+    Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  letter-spacing: 0.01em;
 }
 
 a {
@@ -48,4 +73,60 @@ textarea {
 
 .focus-ring:focus-visible {
   outline-color: var(--accent);
+}
+
+/* ===== Material Symbols icon font ===== */
+.material-symbols-rounded {
+  font-family: var(--font-material-symbols), "Material Symbols Rounded";
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  font-feature-settings: "liga";
+  -webkit-font-feature-settings: "liga";
+  -webkit-font-smoothing: antialiased;
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+/* ===== Material elevation utilities ===== */
+.md-elevation-1 { box-shadow: var(--md-elevation-1); }
+.md-elevation-2 { box-shadow: var(--md-elevation-2); }
+.md-elevation-3 { box-shadow: var(--md-elevation-3); }
+.md-elevation-4 { box-shadow: var(--md-elevation-4); }
+
+/* ===== Material state layer (hover/press overlay) ===== */
+.md-state-layer {
+  position: relative;
+  isolation: isolate;
+  transition: box-shadow var(--md-duration) var(--md-ease-standard);
+}
+.md-state-layer::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: currentColor;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--md-duration) var(--md-ease-standard);
+  z-index: -1;
+}
+.md-state-layer:hover::after { opacity: 0.08; }
+.md-state-layer:active::after { opacity: 0.12; }
+
+/* Material ripple-ish press feedback on interactive surfaces */
+.md-interactive {
+  transition: box-shadow var(--md-duration) var(--md-ease-standard),
+    transform var(--md-duration) var(--md-ease-standard),
+    background-color var(--md-duration) var(--md-ease-standard);
+}
+.md-interactive:active {
+  transform: scale(0.98);
 }

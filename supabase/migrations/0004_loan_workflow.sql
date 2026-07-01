@@ -245,7 +245,7 @@ begin
     'loan.status_changed',
     'loan_applications',
     p_application_id,
-    case when p_status in ('rejected', 'cancelled') then 'warning' else 'info' end,
+    (case when p_status in ('rejected', 'cancelled') then 'warning' else 'info' end)::public.audit_severity,
     jsonb_build_object('status', v_application.status),
     jsonb_build_object('status', p_status),
     jsonb_build_object('note', nullif(trim(coalesce(p_note, '')), ''))

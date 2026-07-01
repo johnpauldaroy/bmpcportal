@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeft, ArrowRight, Check, CheckCircle2, Copy, Send } from "lucide-react";
+import { ArrowLeft, ArrowRight, Check, CheckCircle2, Copy, Send } from "@/components/ui/icon";
 import { useMemo, useState } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -48,7 +48,7 @@ type ApplicantAttachmentKind =
   | "applicant_id_back"
   | "applicant_id_selfie";
 
-const MAX_FILE_BYTES = 20 * 1024 * 1024;
+const MAX_FILE_BYTES = 2 * 1024 * 1024;
 
 const applicantAttachmentSlots: {
   kind: ApplicantAttachmentKind;
@@ -279,7 +279,7 @@ export function LoanApplicationForm({
       const file = files[slot.kind];
       if (!file) continue;
       if (file.size > MAX_FILE_BYTES) {
-        throw new Error(`${slot.label} exceeds the 20MB limit.`);
+        throw new Error(`${slot.label} exceeds the 2MB limit.`);
       }
 
       const extension = file.name.split(".").pop()?.toLowerCase() ?? "jpg";
@@ -401,34 +401,34 @@ export function LoanApplicationForm({
 
   if (submitted) {
     return (
-      <div className="grid place-items-center gap-5 rounded-2xl border border-[#bfe3d8] bg-[#f3fbf8] px-6 py-12 text-center">
-        <span className="grid size-16 place-items-center rounded-full bg-[#d1ece6] text-[#0b5d53]">
+      <div className="grid place-items-center gap-5 rounded-2xl border border-[#BDD6FF] bg-[#DAE7FF] px-6 py-12 text-center">
+        <span className="grid size-16 place-items-center rounded-full bg-[#BDD6FF] text-[#1F52F1]">
           <CheckCircle2 aria-hidden size={40} />
         </span>
         <div className="grid gap-2">
-          <h2 className="text-xl font-bold text-[#0b5d53]">Application submitted successfully</h2>
-          <p className="mx-auto max-w-md text-sm leading-6 text-[#395a52]">
+          <h2 className="text-xl font-bold text-[#1F52F1]">Application submitted successfully</h2>
+          <p className="mx-auto max-w-md text-sm leading-6 text-[#1F52F1]">
             Thank you! Your loan application has been received. Please wait for the assistance of our
             staff &mdash; they will review your details and contact you about the next steps. No
             further action is needed from you right now.
           </p>
           {submitted.coMakerCount > 0 ? (
-            <p className="mx-auto max-w-md text-sm leading-6 text-[#395a52]">
+            <p className="mx-auto max-w-md text-sm leading-6 text-[#1F52F1]">
               We&apos;ve emailed your {submitted.coMakerCount === 1 ? "co-maker" : "co-makers"} a
               link to complete their part. Your application proceeds once{" "}
               {submitted.coMakerCount === 1 ? "they finish" : "they both finish"}.
             </p>
           ) : null}
           {submitted.applicationNumber ? (
-            <div className="mx-auto flex flex-wrap items-center justify-center gap-2 text-sm text-[#395a52]">
+            <div className="mx-auto flex flex-wrap items-center justify-center gap-2 text-sm text-[#1F52F1]">
               <span>
                 Reference number:{" "}
-                <span className="font-semibold text-[#0b5d53]">{submitted.applicationNumber}</span>
+                <span className="font-semibold text-[#1F52F1]">{submitted.applicationNumber}</span>
               </span>
               <button
                 type="button"
                 onClick={() => copyReference(submitted.applicationNumber!)}
-                className="inline-flex items-center gap-1 rounded-md border border-[#bfe3d8] bg-white px-2 py-1 text-xs font-semibold text-[#0b5d53] transition hover:bg-[#e9f6f1]"
+                className="inline-flex items-center gap-1 rounded-md border border-[#BDD6FF] bg-white px-2 py-1 text-xs font-semibold text-[#1F52F1] transition hover:bg-[#DAE7FF]"
               >
                 {copied ? (
                   <>
@@ -468,13 +468,13 @@ export function LoanApplicationForm({
         <section className="grid gap-4">
           <SectionHeading>Loan Information</SectionHeading>
 
-          <label className="grid gap-2 text-sm font-semibold text-[#344456]">
+          <label className="grid gap-2 text-sm font-semibold text-[#334155]">
             <span>
               Loan Applied For
               <span className="text-[#b42318]"> *</span>
             </span>
             <select
-              className="min-h-10 rounded-md border border-[#cbd7e3] bg-white px-3 text-sm text-[#17263a]"
+              className="min-h-11 rounded-lg border border-[#CBD5E1] outline-none transition-colors focus:border-[#3673FC] focus:ring-2 focus:ring-[#3673FC]/20 bg-white px-3 text-sm text-[#1E293B]"
               value={selectedProductKey}
               onChange={(event) => setSelectedProductKey(event.target.value)}
               required
@@ -487,7 +487,7 @@ export function LoanApplicationForm({
             </select>
           </label>
           {selectedProduct ? (
-            <p className="rounded-md border border-[#e1e8ef] bg-[#f8fafc] px-3 py-2 text-sm text-[#5f6c7b]">
+            <p className="rounded-md border border-[#E2E8F0] bg-[#F8FAFC] px-3 py-2 text-sm text-[#475569]">
               {formatPeso(selectedProduct.min_amount)} to {formatPeso(selectedProduct.max_amount)}
               {" | "}
               {selectedProduct.min_term_months}-{selectedProduct.max_term_months} months
@@ -584,7 +584,7 @@ export function LoanApplicationForm({
           <SectionHeading>Real Property Owned</SectionHeading>
           <BannerNote>Optional. Leave blank if not applicable.</BannerNote>
           {properties.map((property, index) => (
-            <div key={index} className="grid gap-4 rounded-md border border-[#e1e8ef] p-4">
+            <div key={index} className="grid gap-4 rounded-md border border-[#E2E8F0] p-4">
               {properties.length > 1 ? (
                 <div className="flex justify-end">
                   <button
@@ -647,7 +647,7 @@ export function LoanApplicationForm({
             they can fill in their own details and upload their signature and valid ID.
           </BannerNote>
           <div className="grid gap-4">
-            <h3 className="text-sm font-bold uppercase tracking-wide text-[#344456]">
+            <h3 className="text-sm font-bold uppercase tracking-wide text-[#334155]">
               First Co-Maker
             </h3>
             <CoMakerInviteFieldset
@@ -656,7 +656,7 @@ export function LoanApplicationForm({
             />
           </div>
           <div className="grid gap-4">
-            <h3 className="text-sm font-bold uppercase tracking-wide text-[#344456]">
+            <h3 className="text-sm font-bold uppercase tracking-wide text-[#334155]">
               Second Co-Maker
             </h3>
             <CoMakerInviteFieldset
@@ -672,11 +672,11 @@ export function LoanApplicationForm({
           <SectionHeading>Applicant&apos;s ID Verification</SectionHeading>
           <BannerNote>
             Sign directly in the box below, or switch to uploading a photo of your signature.
-            Upload your government ID front and back. Accepts .jpeg, .jpg, .png up to 20MB each.
+            Upload your government ID front and back. Accepts .jpeg, .jpg, .png up to 2MB each.
           </BannerNote>
           <div className="grid gap-2">
             <div className="flex items-center justify-between">
-              <span className="text-sm font-semibold text-[#344456]">
+              <span className="text-sm font-semibold text-[#334155]">
                 Signature
                 <span className="text-[#b42318]"> *</span>
               </span>
@@ -690,8 +690,8 @@ export function LoanApplicationForm({
                   className={
                     "rounded-full px-3 py-1 font-semibold " +
                     (signatureMode === "draw"
-                      ? "bg-[#136f63] text-white"
-                      : "bg-[#eef2f6] text-[#5f6c7b]")
+                      ? "bg-[#3673FC] text-white"
+                      : "bg-[#F1F5F9] text-[#475569]")
                   }
                 >
                   Draw signature
@@ -705,8 +705,8 @@ export function LoanApplicationForm({
                   className={
                     "rounded-full px-3 py-1 font-semibold " +
                     (signatureMode === "upload"
-                      ? "bg-[#136f63] text-white"
-                      : "bg-[#eef2f6] text-[#5f6c7b]")
+                      ? "bg-[#3673FC] text-white"
+                      : "bg-[#F1F5F9] text-[#475569]")
                   }
                 >
                   Upload photo
@@ -751,7 +751,7 @@ export function LoanApplicationForm({
       {step === 5 ? (
         <section className="grid gap-4">
           <SectionHeading>Review &amp; Submit</SectionHeading>
-          <dl className="grid gap-2 rounded-md border border-[#e1e8ef] bg-[#f8fafc] p-4 text-sm">
+          <dl className="grid gap-2 rounded-md border border-[#E2E8F0] bg-[#F8FAFC] p-4 text-sm">
             <Row label="Loan applied for" value={selectedProduct?.name ?? "—"} />
             <Row label="Amount" value={amountRequested ? formatPeso(amountRequested) : "—"} />
             <Row label="Term" value={preferredTermMonths ? `${preferredTermMonths} months` : "—"} />
@@ -766,7 +766,7 @@ export function LoanApplicationForm({
               value={`${Object.keys(files).length} of ${applicantAttachmentSlots.length} files attached`}
             />
           </dl>
-          <label className="flex items-start gap-2 text-sm text-[#344456]">
+          <label className="flex items-start gap-2 text-sm text-[#334155]">
             <input
               type="checkbox"
               checked={consent}
@@ -805,8 +805,8 @@ export function LoanApplicationForm({
 function Row({ label, value }: { label: string; value: string }) {
   return (
     <div className="grid gap-1 sm:grid-cols-[12rem_minmax(0,1fr)] sm:gap-4">
-      <dt className="text-[#5f6c7b]">{label}</dt>
-      <dd className="font-semibold text-[#17263a]">{value}</dd>
+      <dt className="text-[#475569]">{label}</dt>
+      <dd className="font-semibold text-[#1E293B]">{value}</dd>
     </div>
   );
 }

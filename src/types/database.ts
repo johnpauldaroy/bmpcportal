@@ -12,6 +12,7 @@ export type LoanStatus =
   | "released"
   | "rejected"
   | "cancelled";
+export type LoanAgreementStatus = "draft" | "sent" | "accepted" | "declined" | "cancelled";
 export type AuditSeverity = "info" | "warning" | "critical";
 export type CoverageStatus = "active" | "expiring" | "expired" | "cancelled";
 export type MortuaryStatus = "active" | "inactive" | "claim_pending" | "claimed" | "cancelled";
@@ -537,6 +538,43 @@ export type Database = {
           byte_size: number | null;
           created_by: string | null;
           created_at: string;
+        };
+        Insert: Record<string, unknown>;
+        Update: Record<string, unknown>;
+        Relationships: [];
+      };
+      loan_agreements: {
+        Row: {
+          id: string;
+          loan_application_id: string;
+          status: LoanAgreementStatus;
+          amount_of_loan: number;
+          loan_retention_percent: number | null;
+          loan_retention_amount: number | null;
+          service_fee_percent: number | null;
+          service_fee_amount: number | null;
+          filing_fee: number;
+          other_deductions: Array<{ label: string; amount: number }>;
+          total_deduction: number | null;
+          net_loan_proceeds: number | null;
+          type_of_loan: string | null;
+          purpose_of_loan: string | null;
+          term_months: number | null;
+          interest_rate_percent: number | null;
+          security: string | null;
+          monthly_amortization: number | null;
+          loan_date: string | null;
+          maturity_date: string | null;
+          first_payment_due: string | null;
+          amort_breakdown: Record<string, number>;
+          sent_at: string | null;
+          sent_by: string | null;
+          accepted_at: string | null;
+          maker_signature_bucket: string | null;
+          maker_signature_path: string | null;
+          maker_acknowledged: boolean;
+          created_at: string;
+          updated_at: string;
         };
         Insert: Record<string, unknown>;
         Update: Record<string, unknown>;

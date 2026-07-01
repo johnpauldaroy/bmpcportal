@@ -1,4 +1,4 @@
-import { CheckCircle2, ShieldAlert } from "lucide-react";
+import { CheckCircle2, ShieldAlert } from "@/components/ui/icon";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { CoMakerCompletionForm } from "@/features/loans/co-maker-completion-form";
 
@@ -8,11 +8,11 @@ export const metadata = {
 
 function Frame({ children }: { children: React.ReactNode }) {
   return (
-    <main className="min-h-dvh bg-[#f0f4f8] px-4 py-10">
-      <div className="mx-auto max-w-4xl rounded-2xl border border-[#d8e1ea] bg-white p-6 shadow-sm sm:p-8">
-        <header className="mb-6 border-b border-[#e1e8ef] pb-4">
-          <p className="text-xs font-bold uppercase tracking-wider text-[#136f63]">BMPC Portal</p>
-          <h1 className="mt-1 text-xl font-semibold text-[#10233f]">Loan Co-Maker Form</h1>
+    <main className="min-h-dvh bg-[#F1F5F9] px-4 py-10">
+      <div className="mx-auto max-w-4xl rounded-2xl border border-[#E2E8F0] bg-white p-6 shadow-sm sm:p-8">
+        <header className="mb-6 border-b border-[#E2E8F0] pb-4">
+          <p className="text-xs font-bold uppercase tracking-wider text-[#3673FC]">BMPC Portal</p>
+          <h1 className="mt-1 text-xl font-semibold text-[#0F172A]">Loan Co-Maker Form</h1>
         </header>
         {children}
       </div>
@@ -82,7 +82,7 @@ export default async function CoMakerPage({
 
   return (
     <Frame>
-      <p className="mb-6 rounded-md bg-[#e3f0fb] px-4 py-3 text-sm text-[#1e4e79]">
+      <p className="mb-6 rounded-md bg-[#DAE7FF] px-4 py-3 text-sm text-[#1933B4]">
         Hello <strong>{coMaker.first_name} {coMaker.last_name}</strong>, you have been named as a
         co-maker
         {applicantName ? (
@@ -110,7 +110,7 @@ function Notice({
   const Icon = tone === "success" ? CheckCircle2 : ShieldAlert;
   const classes =
     tone === "success"
-      ? "border-[#cdeee4] bg-[#e8f7f1] text-[#0b5d53]"
+      ? "border-[#BDD6FF] bg-[#DAE7FF] text-[#1F52F1]"
       : "border-[#f3c6c0] bg-[#fdecea] text-[#8f1f16]";
   return (
     <div className={`flex items-start gap-3 rounded-md border p-5 ${classes}`}>

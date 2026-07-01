@@ -8,7 +8,7 @@ import { enforceSameOriginRequest } from "@/lib/server/security";
 
 const tokenSchema = z.string().min(24).max(128);
 
-const MAX_FILE_BYTES = 20 * 1024 * 1024;
+const MAX_FILE_BYTES = 2 * 1024 * 1024;
 const ACCEPTED_TYPES = new Set(["image/jpeg", "image/png", "image/jpg"]);
 
 const fileFields = [
@@ -88,7 +88,7 @@ export async function POST(
       return jsonError(`Missing required upload: ${slot.field}.`, 400);
     }
     if (file.size > MAX_FILE_BYTES) {
-      return jsonError(`${slot.field} exceeds the 20MB limit.`, 400);
+      return jsonError(`${slot.field} exceeds the 2MB limit.`, 400);
     }
     if (!ACCEPTED_TYPES.has(file.type)) {
       return jsonError(`${slot.field} must be a JPEG or PNG image.`, 400);

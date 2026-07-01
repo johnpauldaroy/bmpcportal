@@ -5,8 +5,10 @@ const descriptions: Record<string, string> = {
   Members: "Verify pending registrations and manage member access status.",
   "CSV imports": "Validate savings and share capital CSVs before committing snapshots.",
   "Loan reviews": "Review applications, update statuses, and preserve status history.",
+  Announcements: "Publish updates and notices for members.",
   "Knowledge base": "Upload BMPC documents and sync the OpenAI vector store.",
-  Notifications: "Create in-app notifications from operational events."
+  Notifications: "Create in-app notifications from operational events.",
+  Settings: "Manage loan products, branches, and member verification setup."
 };
 
 export default function AdminDashboardPage() {

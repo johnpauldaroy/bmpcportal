@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight } from "@/components/ui/icon";
 import { StatusBadge } from "@/components/ui/status-badge";
 import { EmptyState } from "@/components/ui/empty-state";
 import type { LoanApplicationWithDetails } from "./data";
@@ -20,10 +20,10 @@ export function AdminLoanApplicationsTable({
   }
 
   return (
-    <section className="grid gap-4 rounded-lg border border-[#d8e1ea] bg-white p-5 shadow-sm">
-      <div className="overflow-x-auto rounded-md border border-[#e1e8ef]">
-        <table className="min-w-full divide-y divide-[#e1e8ef] text-left text-sm">
-          <thead className="bg-[#edf3f8] text-[#344456]">
+    <section className="grid gap-4 rounded-xl border border-[#E2E8F0] bg-white p-5 md-elevation-1">
+      <div className="overflow-x-auto rounded-md border border-[#E2E8F0]">
+        <table className="min-w-full divide-y divide-[#E2E8F0] text-left text-sm">
+          <thead className="bg-[#F1F5F9] text-[#334155]">
             <tr>
               <th className="px-3 py-2 font-semibold">Application</th>
               <th className="px-3 py-2 font-semibold">Member</th>
@@ -33,26 +33,26 @@ export function AdminLoanApplicationsTable({
               <th className="px-3 py-2 font-semibold">Action</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-[#e1e8ef]">
+          <tbody className="divide-y divide-[#E2E8F0]">
             {applications.map((application) => (
               <tr key={application.id}>
                 <td className="px-3 py-2">
-                  <p className="font-semibold text-[#10233f]">{application.application_number}</p>
-                  <p className="text-xs text-[#5f6c7b]">{application.product?.name ?? "Unknown"}</p>
+                  <p className="font-semibold text-[#0F172A]">{application.application_number}</p>
+                  <p className="text-xs text-[#475569]">{application.product?.name ?? "Unknown"}</p>
                 </td>
                 <td className="px-3 py-2">
-                  <p className="text-[#10233f]">{application.member?.fullName ?? "Unknown member"}</p>
+                  <p className="text-[#0F172A]">{application.member?.fullName ?? "Unknown member"}</p>
                   {application.member?.memberNumber ? (
-                    <p className="text-xs text-[#5f6c7b]">{application.member.memberNumber}</p>
+                    <p className="text-xs text-[#475569]">{application.member.memberNumber}</p>
                   ) : null}
                 </td>
-                <td className="px-3 py-2 font-semibold text-[#10233f]">
+                <td className="px-3 py-2 font-semibold text-[#0F172A]">
                   {formatPeso(application.amount_requested)}
-                  <span className="block text-xs font-normal text-[#5f6c7b]">
+                  <span className="block text-xs font-normal text-[#475569]">
                     {application.preferred_term_months} months
                   </span>
                 </td>
-                <td className="px-3 py-2 text-[#5f6c7b]">
+                <td className="px-3 py-2 text-[#475569]">
                   {formatDateTime(application.submitted_at)}
                 </td>
                 <td className="px-3 py-2">
@@ -63,7 +63,7 @@ export function AdminLoanApplicationsTable({
                 <td className="px-3 py-2">
                   <Link
                     href={`/admin/loans/${application.id}`}
-                    className="inline-flex items-center gap-1 rounded-md border border-[#cbd7e3] bg-white px-3 py-1.5 text-sm font-semibold text-[#136f63] transition hover:bg-[#edf3f8]"
+                    className="inline-flex items-center gap-1 rounded-md border border-[#E2E8F0] bg-white px-3 py-1.5 text-sm font-semibold text-[#3673FC] transition hover:bg-[#F1F5F9]"
                   >
                     View details
                     <ArrowRight aria-hidden size={16} />

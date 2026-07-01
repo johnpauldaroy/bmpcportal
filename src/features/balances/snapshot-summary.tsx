@@ -1,4 +1,4 @@
-import { Landmark, PiggyBank } from "lucide-react";
+import { Landmark, PiggyBank } from "@/components/ui/icon";
 import { StatusBadge } from "@/components/ui/status-badge";
 import {
   formatSnapshotAmount,
@@ -28,19 +28,19 @@ export function SnapshotSummary({ snapshots }: { snapshots: MemberSnapshotMap })
         return (
           <article
             key={row.label}
-            className="rounded-lg border border-[#d8e1ea] bg-white p-5 shadow-sm"
+            className="rounded-xl border border-[#E2E8F0] bg-white p-5 md-elevation-1"
           >
             <div className="flex items-start justify-between gap-3">
-              <row.icon className="text-[#136f63]" aria-hidden size={24} />
+              <row.icon className="text-[#3673FC]" aria-hidden size={24} />
               <StatusBadge tone={snapshot ? "success" : "warning"}>
                 {snapshot ? "Latest snapshot" : "Pending import"}
               </StatusBadge>
             </div>
-            <h2 className="mt-5 text-sm font-semibold text-[#5f6c7b]">{row.label}</h2>
-            <p className="mt-2 text-2xl font-semibold text-[#10233f]">
+            <h2 className="mt-5 text-sm font-semibold text-[#475569]">{row.label}</h2>
+            <p className="mt-2 text-2xl font-semibold text-[#0F172A]">
               {formatSnapshotAmount(snapshot?.amount ?? null)}
             </p>
-            <p className="mt-2 text-sm font-semibold text-[#344456]">
+            <p className="mt-2 text-sm font-semibold text-[#334155]">
               Last updated as of: {formatSnapshotDate(snapshot?.effectiveDate ?? null)}
             </p>
           </article>

@@ -33,35 +33,35 @@ export default async function MortuaryPage() {
       />
       <div className="grid gap-6">
         <section className="grid gap-4">
-          <h2 className="text-base font-semibold text-[#10233f]">Availments</h2>
+          <h2 className="text-base font-semibold text-[#0F172A]">Availments</h2>
           {records && records.length > 0 ? (
             records.map((record) => (
               <article
                 key={record.id}
-                className="rounded-lg border border-[#d8e1ea] bg-white p-5 shadow-sm"
+                className="rounded-xl border border-[#E2E8F0] bg-white p-5 md-elevation-1"
               >
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div>
                     <StatusBadge tone={statusTone(record.status)}>{record.status}</StatusBadge>
-                    <h3 className="mt-3 text-lg font-semibold text-[#10233f]">
+                    <h3 className="mt-3 text-lg font-semibold text-[#0F172A]">
                       Beneficiary: {record.beneficiary_name ?? "Not set"}
                     </h3>
-                    <p className="mt-1 text-sm text-[#5f6c7b]">
+                    <p className="mt-1 text-sm text-[#475569]">
                       {record.beneficiary_relationship ?? "Relationship not set"}
                     </p>
                   </div>
-                  <p className="text-lg font-semibold text-[#10233f]">
+                  <p className="text-lg font-semibold text-[#0F172A]">
                     {formatPeso(record.contribution_amount)}
                   </p>
                 </div>
-                <dl className="mt-4 grid gap-3 rounded-md border border-[#e1e8ef] bg-[#f8fafc] p-3 text-sm sm:grid-cols-2">
+                <dl className="mt-4 grid gap-3 rounded-md border border-[#E2E8F0] bg-[#F8FAFC] p-3 text-sm sm:grid-cols-2">
                   <div>
-                    <dt className="font-semibold text-[#344456]">Effective date</dt>
-                    <dd className="mt-1 text-[#5f6c7b]">{formatDate(record.effective_date)}</dd>
+                    <dt className="font-semibold text-[#334155]">Effective date</dt>
+                    <dd className="mt-1 text-[#475569]">{formatDate(record.effective_date)}</dd>
                   </div>
                   <div>
-                    <dt className="font-semibold text-[#344456]">Beneficiary contact</dt>
-                    <dd className="mt-1 text-[#5f6c7b]">
+                    <dt className="font-semibold text-[#334155]">Beneficiary contact</dt>
+                    <dd className="mt-1 text-[#475569]">
                       {record.beneficiary_contact ?? "Not set"}
                     </dd>
                   </div>
@@ -77,29 +77,29 @@ export default async function MortuaryPage() {
         </section>
 
         <section className="grid gap-4">
-          <h2 className="text-base font-semibold text-[#10233f]">Claims</h2>
+          <h2 className="text-base font-semibold text-[#0F172A]">Claims</h2>
           {claims && claims.length > 0 ? (
             claims.map((claim) => (
               <article
                 key={claim.id}
-                className="rounded-lg border border-[#d8e1ea] bg-white p-5 shadow-sm"
+                className="rounded-xl border border-[#E2E8F0] bg-white p-5 md-elevation-1"
               >
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div>
                     <StatusBadge tone={statusTone(claim.status)}>{claim.status}</StatusBadge>
-                    <h3 className="mt-3 text-lg font-semibold text-[#10233f]">
+                    <h3 className="mt-3 text-lg font-semibold text-[#0F172A]">
                       {claim.claimant_name}
                     </h3>
-                    <p className="mt-1 text-sm text-[#5f6c7b]">
+                    <p className="mt-1 text-sm text-[#475569]">
                       Submitted {formatDateTime(claim.submitted_at)}
                     </p>
                   </div>
-                  <p className="text-lg font-semibold text-[#10233f]">
+                  <p className="text-lg font-semibold text-[#0F172A]">
                     {formatPeso(claim.claim_amount)}
                   </p>
                 </div>
                 {claim.decision_note ? (
-                  <p className="mt-4 rounded-md border border-[#e1e8ef] bg-[#f8fafc] p-3 text-sm text-[#344456]">
+                  <p className="mt-4 rounded-md border border-[#E2E8F0] bg-[#F8FAFC] p-3 text-sm text-[#334155]">
                     Decision note: {claim.decision_note}
                   </p>
                 ) : null}

@@ -1,0 +1,22 @@
+{
+  "_comment": "Coordinates measured against public/templates/promissory-note.pdf (612x936). pdf-lib origin is bottom-left.",
+  "pageSize": [612, 936],
+  "fields": {
+    "amount": [58, 839],
+    "promissoryNoteNo": [500, 839],
+    "loanDate": [90, 818],
+    "maturityDate": [470, 818],
+    "sumWords": [150, 772],
+    "sumAmount": [400, 772],
+    "interestRate": [510, 772],
+    "installmentWords": [410, 759],
+    "installmentAmount": [55, 746],
+    "firstPayment": [255, 746]
+  },
+  "signatures": {
+    "maker": [150, 557],
+    "coMaker1": [294, 557],
+    "coMaker2": [438, 557],
+    "spouse": [150, 496]
+  }
+}

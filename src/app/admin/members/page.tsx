@@ -1,8 +1,5 @@
-import Link from "next/link";
-import { Settings2 } from "lucide-react";
 import { PageHeader } from "@/components/page-header";
 import { AdminMemberPanel } from "@/features/members/admin-member-panel";
-import { ButtonLink } from "@/components/ui/button";
 import { createClient } from "@/lib/supabase/server";
 
 export default async function AdminMembersPage() {
@@ -16,17 +13,11 @@ export default async function AdminMembersPage() {
 
   return (
     <>
-      <div className="mb-6 flex items-start justify-between gap-4">
-        <PageHeader
-          title="Member verification"
-          description="Review pending registrations, activate verified members, and suspend access when needed."
-          showBack={false}
-        />
-        <ButtonLink href="/admin/members/setup" intent="secondary" className="shrink-0 mt-1">
-          <Settings2 aria-hidden size={16} />
-          Member Setup
-        </ButtonLink>
-      </div>
+      <PageHeader
+        title="Member verification"
+        description="Review pending registrations, activate verified members, and suspend access when needed."
+        showBack={false}
+      />
       <AdminMemberPanel members={members ?? []} />
     </>
   );

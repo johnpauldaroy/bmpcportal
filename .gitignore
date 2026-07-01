@@ -21,6 +21,9 @@ tsconfig.tsbuildinfo
 .env.test.local
 .env.production.local
 
+# Self-hosting stack secrets (deploy/.env holds DB password + JWT + service key)
+deploy/.env
+
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*

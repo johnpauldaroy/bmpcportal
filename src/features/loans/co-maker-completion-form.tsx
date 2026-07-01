@@ -1,6 +1,6 @@
 "use client";
 
-import { Send } from "lucide-react";
+import { Send } from "@/components/ui/icon";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import {
@@ -18,6 +18,7 @@ import {
   occupationOptions,
   validIdOptions
 } from "./application-options";
+import { SignaturePad } from "./signature-pad";
 
 type State = {
   presentAddress: string;
@@ -66,6 +67,7 @@ const emptyState: State = {
 export function CoMakerCompletionForm({ token }: { token: string }) {
   const [state, setState] = useState<State>(emptyState);
   const [files, setFiles] = useState<Partial<Record<FileKey, File>>>({});
+  const [signatureMode, setSignatureMode] = useState<"draw" | "upload">("draw");
   const [message, setMessage] = useState<string | null>(null);
   const [done, setDone] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -136,9 +138,9 @@ export function CoMakerCompletionForm({ token }: { token: string }) {
 
   if (done) {
     return (
-      <div className="rounded-md border border-[#cdeee4] bg-[#e8f7f1] p-6 text-center">
-        <h2 className="text-lg font-semibold text-[#0b5d53]">Thank you!</h2>
-        <p className="mt-2 text-sm text-[#0b5d53]">
+      <div className="rounded-md border border-[#BDD6FF] bg-[#DAE7FF] p-6 text-center">
+        <h2 className="text-lg font-semibold text-[#1F52F1]">Thank you!</h2>
+        <p className="mt-2 text-sm text-[#1F52F1]">
           Your co-maker details and ID verification have been submitted. You may now close this
           page.
         </p>
@@ -295,25 +297,71 @@ export function CoMakerCompletionForm({ token }: { token: string }) {
       <section className="grid gap-4">
         <SectionHeading>ID Verification</SectionHeading>
         <BannerNote>
-          Write your signature on white paper, take a photo, crop, then upload. Upload your
-          government ID front and back. Accepts .jpeg, .jpg, .png up to 20MB each.
+          Sign directly in the box below, or switch to uploading a photo of your signature. Upload
+          your government ID front and back. Accepts .jpeg, .jpg, .png up to 2MB each.
         </BannerNote>
+        <div className="grid gap-2">
+          <div className="flex items-center justify-between">
+            <span className="text-sm font-semibold text-[#334155]">
+              Signature
+              <span className="text-[#b42318]"> *</span>
+            </span>
+            <div className="flex gap-2 text-xs">
+              <button
+                type="button"
+                onClick={() => {
+                  setSignatureMode("draw");
+                  setFile("signature", null);
+                }}
+                className={
+                  "rounded-full px-3 py-1 font-semibold " +
+                  (signatureMode === "draw"
+                    ? "bg-[#3673FC] text-white"
+                    : "bg-[#F1F5F9] text-[#475569]")
+                }
+              >
+                Draw signature
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  setSignatureMode("upload");
+                  setFile("signature", null);
+                }}
+                className={
+                  "rounded-full px-3 py-1 font-semibold " +
+                  (signatureMode === "upload"
+                    ? "bg-[#3673FC] text-white"
+                    : "bg-[#F1F5F9] text-[#475569]")
+                }
+              >
+                Upload photo
+              </button>
+            </div>
+          </div>
+          {signatureMode === "draw" ? (
+            <SignaturePad onChange={(file) => setFile("signature", file)} />
+          ) : (
+            <FileField
+              label="Signature photo"
+              required
+              fileName={files.signature?.name ?? null}
+              onSelect={(file) => setFile("signature", file)}
+            />
+          )}
+        </div>
         <FieldGrid>
-          <FileField
-            label="Signature"
-            required
-            fileName={files.signature?.name ?? null}
-            onSelect={(file) => setFile("signature", file)}
-          />
           <FileField
             label="ID Front Side"
             required
+            capture="environment"
             fileName={files.idFront?.name ?? null}
             onSelect={(file) => setFile("idFront", file)}
           />
           <FileField
             label="ID Back Side"
             required
+            capture="environment"
             fileName={files.idBack?.name ?? null}
             onSelect={(file) => setFile("idBack", file)}
           />

@@ -1,6 +1,6 @@
 "use client";
 
-import { LogOut } from "lucide-react";
+import { LogOut } from "@/components/ui/icon";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { createClient } from "@/lib/supabase/browser";
@@ -17,7 +17,7 @@ export function SignOutButton() {
 
   return (
     <Button
-      className="min-h-0 rounded-lg p-2 text-[#8a99a8] hover:bg-[#edf3f8] hover:text-[#b42318]"
+      className="min-h-0 rounded-lg p-2 text-[#94A3B8] hover:bg-[#F1F5F9] hover:text-[#b42318]"
       intent="secondary"
       onClick={signOut}
       aria-label="Sign out"

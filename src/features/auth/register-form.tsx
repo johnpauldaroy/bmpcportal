@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ArrowLeft, ArrowRight, CheckCircle2, UserPlus } from "lucide-react";
+import { ArrowLeft, ArrowRight, CheckCircle2, UserPlus } from "@/components/ui/icon";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useForm } from "react-hook-form";
@@ -74,17 +74,17 @@ export function RegisterForm({ branches }: { branches: Branch[] }) {
   if (step === 1) {
     return (
       <form className="mt-5 grid gap-4" onSubmit={verifyForm.handleSubmit(onVerify)}>
-        <div className="rounded-lg bg-[#e5f3ef] border border-[#b7dbd4] px-4 py-3">
-          <p className="text-xs leading-5 text-[#0b4f47]">
+        <div className="rounded-lg bg-[#DAE7FF] border border-[#BDD6FF] px-4 py-3">
+          <p className="text-xs leading-5 text-[#173DDE]">
             Enter the <strong>CIF key</strong> and <strong>branch</strong> provided by
             your cooperative. This confirms your membership before creating an account.
           </p>
         </div>
 
-        <label className="grid gap-1 text-sm font-medium text-[#344456]">
+        <label className="grid gap-1 text-sm font-medium text-[#334155]">
           CIF Key
           <input
-            className="focus-ring min-h-11 rounded-md border border-[#cbd7e3] px-3 font-mono tracking-wider uppercase"
+            className="focus-ring min-h-11 rounded-md border border-[#E2E8F0] px-3 font-mono tracking-wider uppercase"
             autoComplete="off"
             placeholder="e.g. BMPC-2024-XXXXX"
             {...verifyForm.register("cifKey")}
@@ -96,10 +96,10 @@ export function RegisterForm({ branches }: { branches: Branch[] }) {
           )}
         </label>
 
-        <label className="grid gap-1 text-sm font-medium text-[#344456]">
+        <label className="grid gap-1 text-sm font-medium text-[#334155]">
           Branch
           <select
-            className="focus-ring min-h-11 rounded-md border border-[#cbd7e3] px-3 bg-white"
+            className="focus-ring min-h-11 rounded-md border border-[#E2E8F0] px-3 bg-white"
             {...verifyForm.register("branchCode")}
             defaultValue=""
           >
@@ -128,18 +128,18 @@ export function RegisterForm({ branches }: { branches: Branch[] }) {
   return (
     <form className="mt-5 grid gap-4" onSubmit={registerForm.handleSubmit(onRegister)}>
       {verified && (
-        <div className="flex items-center gap-2 rounded-lg bg-[#e5f3ef] border border-[#b7dbd4] px-4 py-3">
-          <CheckCircle2 size={16} className="shrink-0 text-[#136f63]" />
-          <p className="text-xs leading-5 text-[#0b4f47]">
+        <div className="flex items-center gap-2 rounded-lg bg-[#DAE7FF] border border-[#BDD6FF] px-4 py-3">
+          <CheckCircle2 size={16} className="shrink-0 text-[#3673FC]" />
+          <p className="text-xs leading-5 text-[#173DDE]">
             Membership verified — Member No. <strong>{verified.memberNumber}</strong>
           </p>
         </div>
       )}
 
-      <label className="grid gap-1 text-sm font-medium text-[#344456]">
+      <label className="grid gap-1 text-sm font-medium text-[#334155]">
         Full name
         <input
-          className="focus-ring min-h-11 rounded-md border border-[#cbd7e3] px-3"
+          className="focus-ring min-h-11 rounded-md border border-[#E2E8F0] px-3"
           autoComplete="name"
           {...registerForm.register("fullName")}
         />
@@ -150,10 +150,10 @@ export function RegisterForm({ branches }: { branches: Branch[] }) {
         )}
       </label>
 
-      <label className="grid gap-1 text-sm font-medium text-[#344456]">
+      <label className="grid gap-1 text-sm font-medium text-[#334155]">
         Email
         <input
-          className="focus-ring min-h-11 rounded-md border border-[#cbd7e3] px-3"
+          className="focus-ring min-h-11 rounded-md border border-[#E2E8F0] px-3"
           type="email"
           autoComplete="email"
           {...registerForm.register("email")}
@@ -165,10 +165,10 @@ export function RegisterForm({ branches }: { branches: Branch[] }) {
         )}
       </label>
 
-      <label className="grid gap-1 text-sm font-medium text-[#344456]">
+      <label className="grid gap-1 text-sm font-medium text-[#334155]">
         Phone
         <input
-          className="focus-ring min-h-11 rounded-md border border-[#cbd7e3] px-3"
+          className="focus-ring min-h-11 rounded-md border border-[#E2E8F0] px-3"
           autoComplete="tel"
           {...registerForm.register("phone")}
         />
@@ -179,10 +179,10 @@ export function RegisterForm({ branches }: { branches: Branch[] }) {
         )}
       </label>
 
-      <label className="grid gap-1 text-sm font-medium text-[#344456]">
+      <label className="grid gap-1 text-sm font-medium text-[#334155]">
         Password
         <input
-          className="focus-ring min-h-11 rounded-md border border-[#cbd7e3] px-3"
+          className="focus-ring min-h-11 rounded-md border border-[#E2E8F0] px-3"
           type="password"
           autoComplete="new-password"
           {...registerForm.register("password")}

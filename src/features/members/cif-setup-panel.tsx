@@ -1,6 +1,6 @@
 "use client";
 
-import { Plus, Trash2, ShieldCheck, ShieldOff } from "lucide-react";
+import { Plus, Trash2, ShieldCheck, ShieldOff } from "@/components/ui/icon";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { StatusBadge } from "@/components/ui/status-badge";
@@ -116,15 +116,15 @@ export function CifSetupPanel({ initialBranches, initialRecords }: Props) {
   return (
     <div className="grid gap-6">
       {/* Tab bar */}
-      <div className="flex gap-1 rounded-lg border border-[#d8e1ea] bg-[#f7f9fb] p-1 w-fit">
+      <div className="flex gap-1 rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] p-1 w-fit">
         {(["cif", "branches"] as const).map((t) => (
           <button
             key={t}
             onClick={() => setTab(t)}
             className={`rounded-md px-4 py-1.5 text-sm font-medium transition-colors ${
               tab === t
-                ? "bg-white text-[#10233f] shadow-sm"
-                : "text-[#5f6c7b] hover:text-[#10233f]"
+                ? "bg-white text-[#0F172A] shadow-sm"
+                : "text-[#475569] hover:text-[#0F172A]"
             }`}
           >
             {t === "cif" ? "CIF Records" : "Branches"}
@@ -133,7 +133,7 @@ export function CifSetupPanel({ initialBranches, initialRecords }: Props) {
       </div>
 
       {message && (
-        <p className={`text-sm font-medium ${message.ok ? "text-[#136f63]" : "text-[#b42318]"}`}>
+        <p className={`text-sm font-medium ${message.ok ? "text-[#3673FC]" : "text-[#b42318]"}`}>
           {message.text}
         </p>
       )}
@@ -142,33 +142,33 @@ export function CifSetupPanel({ initialBranches, initialRecords }: Props) {
       {tab === "cif" && (
         <div className="grid gap-6">
           {/* Add form */}
-          <section className="rounded-lg border border-[#d8e1ea] bg-white p-5 shadow-sm">
-            <h2 className="text-base font-semibold text-[#10233f] mb-4">Add CIF Record</h2>
+          <section className="rounded-xl border border-[#E2E8F0] bg-white p-5 md-elevation-1">
+            <h2 className="text-base font-semibold text-[#0F172A] mb-4">Add CIF Record</h2>
             <form onSubmit={addCifRecord} className="grid grid-cols-1 gap-3 sm:grid-cols-4">
-              <label className="grid gap-1 text-sm font-medium text-[#344456]">
+              <label className="grid gap-1 text-sm font-medium text-[#334155]">
                 CIF Key
                 <input
-                  className="focus-ring min-h-9 rounded-md border border-[#cbd7e3] px-3 font-mono uppercase tracking-wide"
+                  className="focus-ring min-h-9 rounded-md border border-[#E2E8F0] px-3 font-mono uppercase tracking-wide"
                   placeholder="e.g. BMPC-2024-00001"
                   value={cifKey}
                   onChange={(e) => setCifKey(e.target.value)}
                   required
                 />
               </label>
-              <label className="grid gap-1 text-sm font-medium text-[#344456]">
+              <label className="grid gap-1 text-sm font-medium text-[#334155]">
                 Member Number
                 <input
-                  className="focus-ring min-h-9 rounded-md border border-[#cbd7e3] px-3 uppercase"
+                  className="focus-ring min-h-9 rounded-md border border-[#E2E8F0] px-3 uppercase"
                   placeholder="e.g. MB-00123"
                   value={memberNumber}
                   onChange={(e) => setMemberNumber(e.target.value)}
                   required
                 />
               </label>
-              <label className="grid gap-1 text-sm font-medium text-[#344456]">
+              <label className="grid gap-1 text-sm font-medium text-[#334155]">
                 Branch
                 <select
-                  className="focus-ring min-h-9 rounded-md border border-[#cbd7e3] px-3 bg-white"
+                  className="focus-ring min-h-9 rounded-md border border-[#E2E8F0] px-3 bg-white"
                   value={branchId}
                   onChange={(e) => setBranchId(e.target.value)}
                   required
@@ -189,14 +189,14 @@ export function CifSetupPanel({ initialBranches, initialRecords }: Props) {
           </section>
 
           {/* Records table */}
-          <section className="rounded-lg border border-[#d8e1ea] bg-white shadow-sm overflow-hidden">
-            <div className="px-5 py-4 border-b border-[#d8e1ea] flex items-center justify-between">
-              <h2 className="text-base font-semibold text-[#10233f]">CIF Records</h2>
-              <span className="text-xs text-[#5f6c7b]">{records.length} total · {records.filter(r => r.is_claimed).length} claimed</span>
+          <section className="rounded-xl border border-[#E2E8F0] bg-white md-elevation-1 overflow-hidden">
+            <div className="px-5 py-4 border-b border-[#E2E8F0] flex items-center justify-between">
+              <h2 className="text-base font-semibold text-[#0F172A]">CIF Records</h2>
+              <span className="text-xs text-[#475569]">{records.length} total · {records.filter(r => r.is_claimed).length} claimed</span>
             </div>
             <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-[#e1e8ef] text-left text-sm">
-                <thead className="bg-[#edf3f8] text-[#344456]">
+              <table className="min-w-full divide-y divide-[#E2E8F0] text-left text-sm">
+                <thead className="bg-[#F1F5F9] text-[#334155]">
                   <tr>
                     <th className="px-4 py-2 font-semibold">CIF Key</th>
                     <th className="px-4 py-2 font-semibold">Member No.</th>
@@ -206,12 +206,12 @@ export function CifSetupPanel({ initialBranches, initialRecords }: Props) {
                     <th className="px-4 py-2 font-semibold"></th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#e1e8ef]">
+                <tbody className="divide-y divide-[#E2E8F0]">
                   {records.length > 0 ? records.map((rec) => (
-                    <tr key={rec.id} className="hover:bg-[#f7f9fb]">
-                      <td className="px-4 py-2 font-mono text-xs text-[#10233f]">{rec.cif_key}</td>
+                    <tr key={rec.id} className="hover:bg-[#F8FAFC]">
+                      <td className="px-4 py-2 font-mono text-xs text-[#0F172A]">{rec.cif_key}</td>
                       <td className="px-4 py-2 font-mono text-xs">{rec.member_number}</td>
-                      <td className="px-4 py-2 text-xs text-[#5f6c7b]">
+                      <td className="px-4 py-2 text-xs text-[#475569]">
                         {rec.branches ? `${rec.branches.name} (${rec.branches.code})` : "—"}
                       </td>
                       <td className="px-4 py-2">
@@ -219,7 +219,7 @@ export function CifSetupPanel({ initialBranches, initialRecords }: Props) {
                           {rec.is_claimed ? "Claimed" : "Available"}
                         </StatusBadge>
                       </td>
-                      <td className="px-4 py-2 text-xs text-[#5f6c7b]">
+                      <td className="px-4 py-2 text-xs text-[#475569]">
                         {new Date(rec.created_at).toLocaleDateString()}
                       </td>
                       <td className="px-4 py-2">
@@ -237,7 +237,7 @@ export function CifSetupPanel({ initialBranches, initialRecords }: Props) {
                     </tr>
                   )) : (
                     <tr>
-                      <td className="px-4 py-6 text-center text-[#5f6c7b]" colSpan={6}>
+                      <td className="px-4 py-6 text-center text-[#475569]" colSpan={6}>
                         No CIF records yet. Add records above so members can register.
                       </td>
                     </tr>
@@ -253,13 +253,13 @@ export function CifSetupPanel({ initialBranches, initialRecords }: Props) {
       {tab === "branches" && (
         <div className="grid gap-6">
           {/* Add form */}
-          <section className="rounded-lg border border-[#d8e1ea] bg-white p-5 shadow-sm">
-            <h2 className="text-base font-semibold text-[#10233f] mb-4">Add Branch</h2>
+          <section className="rounded-xl border border-[#E2E8F0] bg-white p-5 md-elevation-1">
+            <h2 className="text-base font-semibold text-[#0F172A] mb-4">Add Branch</h2>
             <form onSubmit={addBranch} className="grid grid-cols-1 gap-3 sm:grid-cols-3">
-              <label className="grid gap-1 text-sm font-medium text-[#344456]">
+              <label className="grid gap-1 text-sm font-medium text-[#334155]">
                 Branch Code
                 <input
-                  className="focus-ring min-h-9 rounded-md border border-[#cbd7e3] px-3 uppercase font-mono"
+                  className="focus-ring min-h-9 rounded-md border border-[#E2E8F0] px-3 uppercase font-mono"
                   placeholder="e.g. NORTH"
                   value={branchCode}
                   onChange={(e) => setBranchCode(e.target.value)}
@@ -267,10 +267,10 @@ export function CifSetupPanel({ initialBranches, initialRecords }: Props) {
                   required
                 />
               </label>
-              <label className="grid gap-1 text-sm font-medium text-[#344456]">
+              <label className="grid gap-1 text-sm font-medium text-[#334155]">
                 Branch Name
                 <input
-                  className="focus-ring min-h-9 rounded-md border border-[#cbd7e3] px-3"
+                  className="focus-ring min-h-9 rounded-md border border-[#E2E8F0] px-3"
                   placeholder="e.g. North Branch"
                   value={branchName}
                   onChange={(e) => setBranchName(e.target.value)}
@@ -288,13 +288,13 @@ export function CifSetupPanel({ initialBranches, initialRecords }: Props) {
           </section>
 
           {/* Branches table */}
-          <section className="rounded-lg border border-[#d8e1ea] bg-white shadow-sm overflow-hidden">
-            <div className="px-5 py-4 border-b border-[#d8e1ea]">
-              <h2 className="text-base font-semibold text-[#10233f]">Branches</h2>
+          <section className="rounded-xl border border-[#E2E8F0] bg-white md-elevation-1 overflow-hidden">
+            <div className="px-5 py-4 border-b border-[#E2E8F0]">
+              <h2 className="text-base font-semibold text-[#0F172A]">Branches</h2>
             </div>
             <div className="overflow-x-auto">
-              <table className="min-w-full divide-y divide-[#e1e8ef] text-left text-sm">
-                <thead className="bg-[#edf3f8] text-[#344456]">
+              <table className="min-w-full divide-y divide-[#E2E8F0] text-left text-sm">
+                <thead className="bg-[#F1F5F9] text-[#334155]">
                   <tr>
                     <th className="px-4 py-2 font-semibold">Code</th>
                     <th className="px-4 py-2 font-semibold">Name</th>
@@ -302,10 +302,10 @@ export function CifSetupPanel({ initialBranches, initialRecords }: Props) {
                     <th className="px-4 py-2 font-semibold">Actions</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-[#e1e8ef]">
+                <tbody className="divide-y divide-[#E2E8F0]">
                   {branches.length > 0 ? branches.map((branch) => (
-                    <tr key={branch.id} className="hover:bg-[#f7f9fb]">
-                      <td className="px-4 py-2 font-mono text-xs font-semibold text-[#10233f]">{branch.code}</td>
+                    <tr key={branch.id} className="hover:bg-[#F8FAFC]">
+                      <td className="px-4 py-2 font-mono text-xs font-semibold text-[#0F172A]">{branch.code}</td>
                       <td className="px-4 py-2">{branch.name}</td>
                       <td className="px-4 py-2">
                         <StatusBadge tone={branch.is_active ? "success" : "neutral"}>
@@ -316,7 +316,7 @@ export function CifSetupPanel({ initialBranches, initialRecords }: Props) {
                         <button
                           onClick={() => toggleBranch(branch.id, !branch.is_active)}
                           disabled={busy}
-                          className="flex items-center gap-1.5 text-xs font-medium text-[#344456] hover:text-[#136f63] disabled:opacity-40 transition-colors"
+                          className="flex items-center gap-1.5 text-xs font-medium text-[#334155] hover:text-[#3673FC] disabled:opacity-40 transition-colors"
                         >
                           {branch.is_active
                             ? <><ShieldOff size={14} /> Deactivate</>
@@ -327,7 +327,7 @@ export function CifSetupPanel({ initialBranches, initialRecords }: Props) {
                     </tr>
                   )) : (
                     <tr>
-                      <td className="px-4 py-6 text-center text-[#5f6c7b]" colSpan={4}>
+                      <td className="px-4 py-6 text-center text-[#475569]" colSpan={4}>
                         No branches found.
                       </td>
                     </tr>

@@ -4,10 +4,10 @@ import { cn } from "@/lib/utils";
 type Tone = "neutral" | "success" | "warning" | "danger";
 
 const toneClass: Record<Tone, string> = {
-  neutral: "bg-[#edf3f8] text-[#344456]",
-  success: "bg-[#e5f3ef] text-[#0b5d53]",
-  warning: "bg-[#fff4dc] text-[#7b4c00]",
-  danger: "bg-[#fde8e5] text-[#8f1f16]"
+  neutral: "bg-[#F1F5F9] text-[#334155]",
+  success: "bg-[#D1FAE5] text-[#047857]",
+  warning: "bg-[#FEF3C7] text-[#B45309]",
+  danger: "bg-[#FEE2E2] text-[#B91C1C]"
 };
 
 export function StatusBadge({

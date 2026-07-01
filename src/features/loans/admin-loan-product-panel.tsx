@@ -1,6 +1,6 @@
 "use client";
 
-import { Pencil, PlusCircle } from "lucide-react";
+import { Pencil, PlusCircle } from "@/components/ui/icon";
 import { useMemo, useState, type FormEvent } from "react";
 import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
@@ -111,11 +111,11 @@ export function AdminLoanProductPanel({ products }: { products: LoanProduct[] })
   }
 
   return (
-    <section className="grid gap-5 rounded-lg border border-[#d8e1ea] bg-white p-5 shadow-sm">
+    <section className="grid gap-5 rounded-xl border border-[#E2E8F0] bg-white p-5 md-elevation-1">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <h2 className="text-base font-semibold text-[#10233f]">Loan products</h2>
-          <p className="mt-1 text-sm text-[#5f6c7b]">
+          <h2 className="text-base font-semibold text-[#0F172A]">Loan products</h2>
+          <p className="mt-1 text-sm text-[#475569]">
             Active products appear on the member loan application form.
           </p>
         </div>
@@ -126,19 +126,19 @@ export function AdminLoanProductPanel({ products }: { products: LoanProduct[] })
 
       <form className="grid gap-4" onSubmit={saveProduct}>
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          <label className="grid gap-2 text-sm font-semibold text-[#344456]">
+          <label className="grid gap-2 text-sm font-semibold text-[#334155]">
             Code
             <input
-              className="min-h-10 rounded-md border border-[#cbd7e3] bg-white px-3 text-sm uppercase text-[#17263a]"
+              className="min-h-11 rounded-lg border border-[#CBD5E1] outline-none transition-colors focus:border-[#3673FC] focus:ring-2 focus:ring-[#3673FC]/20 bg-white px-3 text-sm uppercase text-[#1E293B]"
               value={form.code}
               onChange={(event) => setField("code", event.target.value.toUpperCase())}
               required
             />
           </label>
-          <label className="grid gap-2 text-sm font-semibold text-[#344456] sm:col-span-1 lg:col-span-3">
+          <label className="grid gap-2 text-sm font-semibold text-[#334155] sm:col-span-1 lg:col-span-3">
             Name
             <input
-              className="min-h-10 rounded-md border border-[#cbd7e3] bg-white px-3 text-sm text-[#17263a]"
+              className="min-h-11 rounded-lg border border-[#CBD5E1] outline-none transition-colors focus:border-[#3673FC] focus:ring-2 focus:ring-[#3673FC]/20 bg-white px-3 text-sm text-[#1E293B]"
               value={form.name}
               onChange={(event) => setField("name", event.target.value)}
               required
@@ -146,10 +146,10 @@ export function AdminLoanProductPanel({ products }: { products: LoanProduct[] })
           </label>
         </div>
 
-        <label className="grid gap-2 text-sm font-semibold text-[#344456]">
+        <label className="grid gap-2 text-sm font-semibold text-[#334155]">
           Description
           <textarea
-            className="min-h-20 rounded-md border border-[#cbd7e3] bg-white px-3 py-2 text-sm leading-6 text-[#17263a]"
+            className="min-h-20 rounded-md border border-[#E2E8F0] bg-white px-3 py-2 text-sm leading-6 text-[#1E293B]"
             value={form.description}
             onChange={(event) => setField("description", event.target.value)}
             maxLength={500}
@@ -157,10 +157,10 @@ export function AdminLoanProductPanel({ products }: { products: LoanProduct[] })
         </label>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          <label className="grid gap-2 text-sm font-semibold text-[#344456]">
+          <label className="grid gap-2 text-sm font-semibold text-[#334155]">
             Min amount
             <input
-              className="min-h-10 rounded-md border border-[#cbd7e3] bg-white px-3 text-sm text-[#17263a]"
+              className="min-h-11 rounded-lg border border-[#CBD5E1] outline-none transition-colors focus:border-[#3673FC] focus:ring-2 focus:ring-[#3673FC]/20 bg-white px-3 text-sm text-[#1E293B]"
               type="number"
               min="0"
               step="0.01"
@@ -169,10 +169,10 @@ export function AdminLoanProductPanel({ products }: { products: LoanProduct[] })
               required
             />
           </label>
-          <label className="grid gap-2 text-sm font-semibold text-[#344456]">
+          <label className="grid gap-2 text-sm font-semibold text-[#334155]">
             Max amount
             <input
-              className="min-h-10 rounded-md border border-[#cbd7e3] bg-white px-3 text-sm text-[#17263a]"
+              className="min-h-11 rounded-lg border border-[#CBD5E1] outline-none transition-colors focus:border-[#3673FC] focus:ring-2 focus:ring-[#3673FC]/20 bg-white px-3 text-sm text-[#1E293B]"
               type="number"
               min="1"
               step="0.01"
@@ -181,10 +181,10 @@ export function AdminLoanProductPanel({ products }: { products: LoanProduct[] })
               required
             />
           </label>
-          <label className="grid gap-2 text-sm font-semibold text-[#344456]">
+          <label className="grid gap-2 text-sm font-semibold text-[#334155]">
             Min term
             <input
-              className="min-h-10 rounded-md border border-[#cbd7e3] bg-white px-3 text-sm text-[#17263a]"
+              className="min-h-11 rounded-lg border border-[#CBD5E1] outline-none transition-colors focus:border-[#3673FC] focus:ring-2 focus:ring-[#3673FC]/20 bg-white px-3 text-sm text-[#1E293B]"
               type="number"
               min="1"
               value={form.minTermMonths}
@@ -192,10 +192,10 @@ export function AdminLoanProductPanel({ products }: { products: LoanProduct[] })
               required
             />
           </label>
-          <label className="grid gap-2 text-sm font-semibold text-[#344456]">
+          <label className="grid gap-2 text-sm font-semibold text-[#334155]">
             Max term
             <input
-              className="min-h-10 rounded-md border border-[#cbd7e3] bg-white px-3 text-sm text-[#17263a]"
+              className="min-h-11 rounded-lg border border-[#CBD5E1] outline-none transition-colors focus:border-[#3673FC] focus:ring-2 focus:ring-[#3673FC]/20 bg-white px-3 text-sm text-[#1E293B]"
               type="number"
               min="1"
               value={form.maxTermMonths}
@@ -203,10 +203,10 @@ export function AdminLoanProductPanel({ products }: { products: LoanProduct[] })
               required
             />
           </label>
-          <label className="grid gap-2 text-sm font-semibold text-[#344456]">
+          <label className="grid gap-2 text-sm font-semibold text-[#334155]">
             Interest %
             <input
-              className="min-h-10 rounded-md border border-[#cbd7e3] bg-white px-3 text-sm text-[#17263a]"
+              className="min-h-11 rounded-lg border border-[#CBD5E1] outline-none transition-colors focus:border-[#3673FC] focus:ring-2 focus:ring-[#3673FC]/20 bg-white px-3 text-sm text-[#1E293B]"
               type="number"
               min="0"
               step="0.0001"
@@ -217,7 +217,7 @@ export function AdminLoanProductPanel({ products }: { products: LoanProduct[] })
         </div>
 
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <label className="inline-flex items-center gap-2 text-sm font-semibold text-[#344456]">
+          <label className="inline-flex items-center gap-2 text-sm font-semibold text-[#334155]">
             <input
               type="checkbox"
               checked={form.isActive}
@@ -238,12 +238,12 @@ export function AdminLoanProductPanel({ products }: { products: LoanProduct[] })
           </div>
         </div>
 
-        {message ? <p className="text-sm font-medium text-[#344456]">{message}</p> : null}
+        {message ? <p className="text-sm font-medium text-[#334155]">{message}</p> : null}
       </form>
 
-      <div className="overflow-x-auto rounded-md border border-[#e1e8ef]">
-        <table className="min-w-full divide-y divide-[#e1e8ef] text-left text-sm">
-          <thead className="bg-[#edf3f8] text-[#344456]">
+      <div className="overflow-x-auto rounded-md border border-[#E2E8F0]">
+        <table className="min-w-full divide-y divide-[#E2E8F0] text-left text-sm">
+          <thead className="bg-[#F1F5F9] text-[#334155]">
             <tr>
               <th className="px-3 py-2 font-semibold">Product</th>
               <th className="px-3 py-2 font-semibold">Amount range</th>
@@ -252,13 +252,13 @@ export function AdminLoanProductPanel({ products }: { products: LoanProduct[] })
               <th className="px-3 py-2 font-semibold">Action</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-[#e1e8ef]">
+          <tbody className="divide-y divide-[#E2E8F0]">
             {products.length > 0 ? (
               products.map((product) => (
                 <tr key={product.id}>
                   <td className="px-3 py-2">
-                    <span className="block font-semibold text-[#10233f]">{product.name}</span>
-                    <span className="text-xs text-[#5f6c7b]">{product.code}</span>
+                    <span className="block font-semibold text-[#0F172A]">{product.name}</span>
+                    <span className="text-xs text-[#475569]">{product.code}</span>
                   </td>
                   <td className="px-3 py-2">
                     {formatPeso(product.min_amount)} - {formatPeso(product.max_amount)}
@@ -286,7 +286,7 @@ export function AdminLoanProductPanel({ products }: { products: LoanProduct[] })
               ))
             ) : (
               <tr>
-                <td className="px-3 py-6 text-center text-[#5f6c7b]" colSpan={5}>
+                <td className="px-3 py-6 text-center text-[#475569]" colSpan={5}>
                   No loan products configured yet.
                 </td>
               </tr>

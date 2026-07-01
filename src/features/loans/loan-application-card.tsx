@@ -1,9 +1,9 @@
 "use client";
 
 import {
-  Calendar,
   ChevronDown,
   Clock,
+  Download,
   Eye,
   FileText,
   FileUp,
@@ -12,7 +12,7 @@ import {
   UserRound,
   UsersRound,
   X
-} from "lucide-react";
+} from "@/components/ui/icon";
 import Link from "next/link";
 import { type ReactNode, useMemo, useState } from "react";
 import { EmptyState } from "@/components/ui/empty-state";
@@ -20,6 +20,7 @@ import { StatusBadge } from "@/components/ui/status-badge";
 import type { LoanApplicationWithDetails } from "./data";
 import {
   civilStatusOptions,
+  dependentsOptions,
   employmentStatusOptions,
   loanPurposeOptions,
   loanTypeOptions,
@@ -77,15 +78,15 @@ export function LoanApplicationCard({
     <div className="grid gap-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div>
-          <h2 className="text-base font-semibold text-[#10233f]">Your applications</h2>
-          <p className="mt-1 text-sm text-[#5f6c7b]">
+          <h2 className="text-base font-semibold text-[#0F172A]">Your applications</h2>
+          <p className="mt-1 text-sm text-[#475569]">
             Track each application from submission through release or decision.
           </p>
         </div>
         <Link
           href="/member/loans/new"
           className="flex items-center gap-2 rounded-xl px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition-colors"
-          style={{ background: "#136f63" }}
+          style={{ background: "#3673FC" }}
         >
           <FileUp size={16} />
           Start application
@@ -93,17 +94,17 @@ export function LoanApplicationCard({
       </div>
 
       {applications.length > 0 ? (
-        <div className="overflow-hidden rounded-xl border border-[#d8e1ea] bg-white shadow-sm">
+        <div className="overflow-hidden rounded-xl border border-[#E2E8F0] bg-white shadow-sm">
           <table className="min-w-full text-sm">
             <thead>
-              <tr style={{ background: "#f0f4f8", borderBottom: "1px solid #e1e8ef" }}>
-                <th className="px-4 py-3 text-left text-xs font-bold uppercase tracking-wider text-[#5f6c7b]">Application #</th>
-                <th className="px-4 py-3 text-left text-xs font-bold uppercase tracking-wider text-[#5f6c7b]">Product</th>
-                <th className="px-4 py-3 text-left text-xs font-bold uppercase tracking-wider text-[#5f6c7b]">Amount</th>
-                <th className="px-4 py-3 text-left text-xs font-bold uppercase tracking-wider text-[#5f6c7b]">Term</th>
-                <th className="px-4 py-3 text-left text-xs font-bold uppercase tracking-wider text-[#5f6c7b]">Submitted</th>
-                <th className="px-4 py-3 text-left text-xs font-bold uppercase tracking-wider text-[#5f6c7b]">Status</th>
-                <th className="px-4 py-3 text-left text-xs font-bold uppercase tracking-wider text-[#5f6c7b]"></th>
+              <tr style={{ background: "#F1F5F9", borderBottom: "1px solid #E2E8F0" }}>
+                <th className="px-4 py-3 text-left text-xs font-bold uppercase tracking-wider text-[#475569]">Application #</th>
+                <th className="px-4 py-3 text-left text-xs font-bold uppercase tracking-wider text-[#475569]">Product</th>
+                <th className="px-4 py-3 text-left text-xs font-bold uppercase tracking-wider text-[#475569]">Amount</th>
+                <th className="px-4 py-3 text-left text-xs font-bold uppercase tracking-wider text-[#475569]">Term</th>
+                <th className="px-4 py-3 text-left text-xs font-bold uppercase tracking-wider text-[#475569]">Submitted</th>
+                <th className="px-4 py-3 text-left text-xs font-bold uppercase tracking-wider text-[#475569]">Status</th>
+                <th className="px-4 py-3 text-left text-xs font-bold uppercase tracking-wider text-[#475569]"></th>
               </tr>
             </thead>
             <tbody>
@@ -112,19 +113,19 @@ export function LoanApplicationCard({
                 return (
                   <tr
                     key={app.id}
-                    style={{ borderBottom: isLast ? "none" : "1px solid #f0f4f8" }}
+                    style={{ borderBottom: isLast ? "none" : "1px solid #F1F5F9" }}
                   >
-                    <td className="px-4 py-3 font-mono text-xs font-semibold text-[#10233f]">
+                    <td className="px-4 py-3 font-mono text-xs font-semibold text-[#0F172A]">
                       {app.application_number}
                     </td>
-                    <td className="px-4 py-3 text-[#344456]">{app.product?.name ?? "-"}</td>
-                    <td className="px-4 py-3 font-semibold text-[#10233f]">
+                    <td className="px-4 py-3 text-[#334155]">{app.product?.name ?? "-"}</td>
+                    <td className="px-4 py-3 font-semibold text-[#0F172A]">
                       {formatPeso(app.amount_requested)}
                     </td>
-                    <td className="px-4 py-3 text-[#5f6c7b]">
+                    <td className="px-4 py-3 text-[#475569]">
                       {app.preferred_term_months} mo.
                     </td>
-                    <td className="px-4 py-3 text-xs text-[#5f6c7b]">
+                    <td className="px-4 py-3 text-xs text-[#475569]">
                       {formatDateTime(app.submitted_at)}
                     </td>
                     <td className="px-4 py-3">
@@ -133,14 +134,24 @@ export function LoanApplicationCard({
                       </StatusBadge>
                     </td>
                     <td className="px-4 py-3">
-                      <button
-                        type="button"
-                        onClick={() => setSelectedId(app.id)}
-                        className="flex items-center gap-1 rounded-lg px-2 py-1 text-xs font-medium text-[#5f6c7b] transition-colors hover:bg-[#eef2f6] hover:text-[#10233f]"
-                      >
-                        <ChevronDown size={15} />
-                        Details
-                      </button>
+                      <div className="flex items-center gap-1">
+                        <button
+                          type="button"
+                          onClick={() => setSelectedId(app.id)}
+                          className="flex items-center gap-1 rounded-lg px-2 py-1 text-xs font-medium text-[#475569] transition-colors hover:bg-[#F1F5F9] hover:text-[#0F172A]"
+                        >
+                          <ChevronDown size={15} />
+                          Details
+                        </button>
+                        <a
+                          href={`/api/member/loans/${app.id}/pdf`}
+                          title="Download application PDF"
+                          className="flex items-center gap-1 rounded-lg px-2 py-1 text-xs font-medium text-[#475569] transition-colors hover:bg-[#F1F5F9] hover:text-[#0F172A]"
+                        >
+                          <Download size={15} />
+                          PDF
+                        </a>
+                      </div>
                     </td>
                   </tr>
                 );
@@ -191,7 +202,7 @@ export function LoanApplicationDetailTabs({
 
   return (
     <>
-      <div className="border-b border-[#e1e8ef] px-5 pt-3">
+      <div className="border-b border-[#E2E8F0] px-5 pt-3">
         <div className="flex gap-2 overflow-x-auto" role="tablist" aria-label="Application details">
           {tabs.map((tab) => {
             const isActive = activeTab === tab.id;
@@ -205,8 +216,8 @@ export function LoanApplicationDetailTabs({
                 className={
                   "inline-flex items-center gap-2 whitespace-nowrap border-b-2 px-3 py-3 text-sm font-semibold " +
                   (isActive
-                    ? "border-[#136f63] text-[#0b5d53]"
-                    : "border-transparent text-[#5f6c7b] hover:text-[#10233f]")
+                    ? "border-[#3673FC] text-[#1F52F1]"
+                    : "border-transparent text-[#475569] hover:text-[#0F172A]")
                 }
               >
                 {tab.icon}
@@ -217,7 +228,7 @@ export function LoanApplicationDetailTabs({
         </div>
       </div>
 
-      <div className="overflow-y-auto bg-[#f8fafc] p-5">
+      <div className="overflow-y-auto bg-[#F8FAFC] p-5">
         {activeTab === "application" ? (
           <DetailSection icon={<FileText size={13} />} title="Application details">
             <DetailGrid>
@@ -247,7 +258,7 @@ export function LoanApplicationDetailTabs({
               <DetailItem label="First payment due" value={application.first_payment_due ?? "-"} />
             </DetailGrid>
             {application.decision_note ? (
-              <div className="mt-3 rounded-lg bg-[#e5f3ef] px-3 py-2 text-sm text-[#0b5d53]">
+              <div className="mt-3 rounded-lg bg-[#DAE7FF] px-3 py-2 text-sm text-[#1F52F1]">
                 <span className="font-semibold">Decision: </span>
                 {application.decision_note}
               </div>
@@ -334,46 +345,11 @@ export function LoanApplicationDetailTabs({
             {application.coMakers.length > 0 ? (
               <div className="grid gap-3">
                 {application.coMakers.map((coMaker) => (
-                  <div
-                    key={coMaker.id}
-                    className="rounded-lg border border-[#e1e8ef] bg-[#f8fafc] p-3"
-                  >
-                    <div className="flex flex-wrap items-center justify-between gap-2">
-                      <p className="text-sm font-semibold text-[#10233f]">
-                        {[coMaker.first_name, coMaker.middle_name, coMaker.last_name]
-                          .filter(Boolean)
-                          .join(" ")}
-                      </p>
-                      <StatusBadge
-                        tone={coMaker.invite_status === "completed" ? "success" : "warning"}
-                      >
-                        {coMaker.co_maker_role === "first" ? "First co-maker" : "Second co-maker"}{" "}
-                        - {coMaker.invite_status}
-                      </StatusBadge>
-                    </div>
-                    <DetailGrid className="mt-3">
-                      <DetailItem label="Email" value={coMaker.email} />
-                      <DetailItem label="Contact no." value={coMaker.contact_no ?? "-"} />
-                      <DetailItem label="Phone" value={coMaker.phone_no ?? "-"} />
-                      <DetailItem
-                        label="Occupation"
-                        value={optionLabel(occupationOptions, coMaker.occupation)}
-                      />
-                      <DetailItem label="Employer" value={coMaker.employer ?? "-"} />
-                      <DetailItem
-                        label="Monthly salary"
-                        value={
-                          coMaker.monthly_salary === null
-                            ? "-"
-                            : formatPeso(coMaker.monthly_salary)
-                        }
-                      />
-                    </DetailGrid>
-                  </div>
+                  <CoMakerCard key={coMaker.id} coMaker={coMaker} />
                 ))}
               </div>
             ) : (
-              <p className="text-sm text-[#5f6c7b]">No co-makers listed.</p>
+              <p className="text-sm text-[#475569]">No co-makers listed.</p>
             )}
           </DetailSection>
         ) : null}
@@ -385,7 +361,7 @@ export function LoanApplicationDetailTabs({
                 {application.realProperties.map((property) => (
                   <DetailGrid
                     key={property.id}
-                    className="rounded-lg border border-[#e1e8ef] bg-[#f8fafc] p-3"
+                    className="rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] p-3"
                   >
                     <DetailItem label="Owner role" value={property.owner_role} />
                     <DetailItem
@@ -410,7 +386,7 @@ export function LoanApplicationDetailTabs({
                 ))}
               </div>
             ) : (
-              <p className="text-sm text-[#5f6c7b]">No real properties listed.</p>
+              <p className="text-sm text-[#475569]">No real properties listed.</p>
             )}
           </DetailSection>
         ) : null}
@@ -418,24 +394,24 @@ export function LoanApplicationDetailTabs({
         {activeTab === "uploads" ? (
           <DetailSection icon={<Paperclip size={13} />} title="Uploads">
             {application.attachments.length > 0 ? (
-              <ul className="grid gap-2 text-sm text-[#344456]">
+              <ul className="grid gap-2 text-sm text-[#334155]">
                 {application.attachments.map((attachment) => (
                   <li
                     key={attachment.id}
-                    className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-[#e1e8ef] bg-[#f8fafc] px-3 py-2"
+                    className="flex flex-wrap items-center justify-between gap-3 rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] px-3 py-2"
                   >
                     <span>
                       <span className="block font-semibold">
                         {attachmentKindLabel[attachment.kind] ?? attachment.kind}
                       </span>
-                      <span className="block text-[#5f6c7b]">
+                      <span className="block text-[#475569]">
                         {attachment.file_name ?? "Uploaded file"}
                       </span>
                     </span>
                     <button
                       type="button"
                       onClick={() => setPreviewAttachment(attachment)}
-                      className="inline-flex items-center gap-1 rounded-md border border-[#cbd7e3] bg-white px-3 py-1.5 text-xs font-semibold text-[#344456] transition hover:bg-[#eef2f6] hover:text-[#10233f]"
+                      className="inline-flex items-center gap-1 rounded-md border border-[#E2E8F0] bg-white px-3 py-1.5 text-xs font-semibold text-[#334155] transition hover:bg-[#F1F5F9] hover:text-[#0F172A]"
                     >
                       <Eye size={14} />
                       View
@@ -444,44 +420,15 @@ export function LoanApplicationDetailTabs({
                 ))}
               </ul>
             ) : (
-              <p className="text-sm text-[#5f6c7b]">No uploads listed.</p>
+              <p className="text-sm text-[#475569]">No uploads listed.</p>
             )}
           </DetailSection>
         ) : null}
 
         {activeTab === "timeline" ? (
-          <div className="grid gap-4 lg:grid-cols-2">
-            <DetailSection icon={<Calendar size={13} />} title="Timeline">
-              <div className="grid gap-2 text-sm text-[#5f6c7b]">
-                <div className="flex justify-between gap-3">
-                  <span>Submitted</span>
-                  <span className="font-medium text-[#344456]">
-                    {formatDateTime(application.submitted_at)}
-                  </span>
-                </div>
-                {application.reviewed_at ? (
-                  <div className="flex justify-between gap-3">
-                    <span>Reviewed</span>
-                    <span className="font-medium text-[#344456]">
-                      {formatDateTime(application.reviewed_at)}
-                    </span>
-                  </div>
-                ) : null}
-                {application.released_at ? (
-                  <div className="flex justify-between gap-3">
-                    <span>Released</span>
-                    <span className="font-medium text-[#136f63]">
-                      {formatDateTime(application.released_at)}
-                    </span>
-                  </div>
-                ) : null}
-              </div>
-            </DetailSection>
-
-            <DetailSection icon={<Clock size={13} />} title="Status history">
-              <LoanHistoryList history={application.history} />
-            </DetailSection>
-          </div>
+          <DetailSection icon={<Clock size={13} />} title="Status history">
+            <LoanHistoryList history={application.history} />
+          </DetailSection>
         ) : null}
       </div>
 
@@ -505,7 +452,7 @@ function ApplicationDetailsModal({
 }) {
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-[#10233f]/55 p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-[#1B308D]/55 p-4"
       role="dialog"
       aria-modal="true"
       aria-labelledby="loan-application-details-title"
@@ -515,17 +462,17 @@ function ApplicationDetailsModal({
         className="grid max-h-[90vh] w-full max-w-6xl overflow-hidden rounded-xl bg-white shadow-2xl"
         onMouseDown={(event) => event.stopPropagation()}
       >
-        <div className="flex flex-wrap items-start justify-between gap-3 border-b border-[#e1e8ef] px-5 py-4">
+        <div className="flex flex-wrap items-start justify-between gap-3 border-b border-[#E2E8F0] px-5 py-4">
           <div>
             <div className="flex flex-wrap items-center gap-2">
-              <h2 id="loan-application-details-title" className="text-lg font-semibold text-[#10233f]">
+              <h2 id="loan-application-details-title" className="text-lg font-semibold text-[#0F172A]">
                 {application.application_number}
               </h2>
               <StatusBadge tone={loanStatusTone(application.status)}>
                 {loanStatusLabel[application.status]}
               </StatusBadge>
             </div>
-            <p className="mt-1 text-sm text-[#5f6c7b]">
+            <p className="mt-1 text-sm text-[#475569]">
               {application.product?.name ?? "Loan application"} -{" "}
               {formatPeso(application.amount_requested)}
             </p>
@@ -533,7 +480,7 @@ function ApplicationDetailsModal({
           <button
             type="button"
             onClick={onClose}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-md text-[#5f6c7b] hover:bg-[#eef2f6] hover:text-[#10233f]"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-md text-[#475569] hover:bg-[#F1F5F9] hover:text-[#0F172A]"
             aria-label="Close application details"
           >
             <X size={18} />
@@ -566,7 +513,7 @@ function AttachmentPreviewModal({
 
   return (
     <div
-      className="fixed inset-0 z-[60] flex items-center justify-center bg-[#10233f]/65 p-4"
+      className="fixed inset-0 z-[60] flex items-center justify-center bg-[#1B308D]/65 p-4"
       role="dialog"
       aria-modal="true"
       aria-labelledby="loan-attachment-preview-title"
@@ -576,42 +523,159 @@ function AttachmentPreviewModal({
         className="grid max-h-[92vh] w-full max-w-5xl overflow-hidden rounded-xl bg-white shadow-2xl"
         onMouseDown={(event) => event.stopPropagation()}
       >
-        <div className="flex flex-wrap items-start justify-between gap-3 border-b border-[#e1e8ef] px-5 py-4">
+        <div className="flex flex-wrap items-start justify-between gap-3 border-b border-[#E2E8F0] px-5 py-4">
           <div>
-            <h3 id="loan-attachment-preview-title" className="text-base font-semibold text-[#10233f]">
+            <h3 id="loan-attachment-preview-title" className="text-base font-semibold text-[#0F172A]">
               {title}
             </h3>
-            <p className="mt-1 text-sm text-[#5f6c7b]">
+            <p className="mt-1 text-sm text-[#475569]">
               {attachment.file_name ?? "Uploaded file"}
             </p>
           </div>
           <button
             type="button"
             onClick={onClose}
-            className="inline-flex h-9 w-9 items-center justify-center rounded-md text-[#5f6c7b] hover:bg-[#eef2f6] hover:text-[#10233f]"
+            className="inline-flex h-9 w-9 items-center justify-center rounded-md text-[#475569] hover:bg-[#F1F5F9] hover:text-[#0F172A]"
             aria-label="Close attachment preview"
           >
             <X size={18} />
           </button>
         </div>
 
-        <div className="flex min-h-[28rem] items-center justify-center overflow-auto bg-[#f8fafc] p-4">
+        <div className="flex min-h-[28rem] items-center justify-center overflow-auto bg-[#F8FAFC] p-4">
           {isImage ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img
               src={source}
               alt={title}
-              className="max-h-[72vh] max-w-full rounded-lg border border-[#e1e8ef] bg-white object-contain"
+              className="max-h-[72vh] max-w-full rounded-lg border border-[#E2E8F0] bg-white object-contain"
             />
           ) : (
             <iframe
               src={source}
               title={title}
-              className="h-[72vh] w-full rounded-lg border border-[#e1e8ef] bg-white"
+              className="h-[72vh] w-full rounded-lg border border-[#E2E8F0] bg-white"
             />
           )}
         </div>
       </div>
+    </div>
+  );
+}
+
+function CoMakerCard({
+  coMaker
+}: {
+  coMaker: LoanApplicationWithDetails["coMakers"][number];
+}) {
+  const isCompleted = coMaker.invite_status === "completed";
+  const [expanded, setExpanded] = useState(false);
+  const fullName = [coMaker.first_name, coMaker.middle_name, coMaker.last_name]
+    .filter(Boolean)
+    .join(" ");
+
+  return (
+    <div className="rounded-lg border border-[#E2E8F0] bg-[#F8FAFC] p-3">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        {isCompleted ? (
+          <button
+            type="button"
+            onClick={() => setExpanded((value) => !value)}
+            aria-expanded={expanded}
+            className="focus-ring -mx-1 flex items-center gap-2 rounded px-1 py-0.5 text-left text-sm font-semibold text-[#0F172A] hover:bg-[#EEF2F7]"
+          >
+            <ChevronDown
+              size={16}
+              className={
+                "text-[#64748B] transition-transform " + (expanded ? "rotate-180" : "")
+              }
+            />
+            {fullName}
+          </button>
+        ) : (
+          <p className="text-sm font-semibold text-[#0F172A]">{fullName}</p>
+        )}
+        <StatusBadge tone={isCompleted ? "success" : "warning"}>
+          {coMaker.co_maker_role === "first" ? "First co-maker" : "Second co-maker"} -{" "}
+          {coMaker.invite_status}
+        </StatusBadge>
+      </div>
+      {!isCompleted ? (
+        <p className="mt-3 text-sm text-[#475569]">
+          Awaiting co-maker submission. Details will appear once the co-maker completes
+          their information.
+        </p>
+      ) : expanded ? (
+        <DetailGrid className="mt-3">
+          <DetailItem label="Email" value={coMaker.email} />
+          <DetailItem label="Contact no." value={coMaker.contact_no ?? "-"} />
+          <DetailItem label="Phone" value={coMaker.phone_no ?? "-"} />
+          <DetailItem label="Landline" value={coMaker.landline_no ?? "-"} />
+          <DetailItem label="Other contact" value={coMaker.other_contact_no ?? "-"} />
+          <DetailItem
+            label="Civil status"
+            value={optionLabel(civilStatusOptions, coMaker.civil_status)}
+          />
+          <DetailItem
+            label="Dependents"
+            value={
+              coMaker.no_of_dependents === null ? "-" : String(coMaker.no_of_dependents)
+            }
+          />
+          <DetailItem
+            label="Occupation"
+            value={optionLabel(occupationOptions, coMaker.occupation)}
+          />
+          <DetailItem
+            label="Employment status"
+            value={optionLabel(employmentStatusOptions, coMaker.employment_status)}
+          />
+          <DetailItem label="Employer" value={coMaker.employer ?? "-"} />
+          <DetailItem
+            label="Monthly salary"
+            value={
+              coMaker.monthly_salary === null ? "-" : formatPeso(coMaker.monthly_salary)
+            }
+          />
+          <DetailItem
+            label="Other monthly income"
+            value={
+              coMaker.other_monthly_income === null
+                ? "-"
+                : formatPeso(coMaker.other_monthly_income)
+            }
+          />
+          <DetailItem
+            label="Valid ID"
+            value={optionLabel(validIdOptions, coMaker.valid_id)}
+          />
+          <DetailItem label="ID number" value={coMaker.id_number ?? "-"} />
+          <DetailItem label="TIN" value={coMaker.tax_identification_number ?? "-"} />
+          <DetailItem label="Spouse" value={coMaker.spouse_name ?? "-"} />
+          <DetailItem
+            label="Present address"
+            value={coMaker.present_address ?? "-"}
+            wide
+          />
+          <DetailItem
+            label="Permanent address"
+            value={coMaker.permanent_address ?? "-"}
+            wide
+          />
+          <DetailItem
+            label="Share capital as of"
+            value={coMaker.share_capital_as_of ?? "-"}
+          />
+          <DetailItem
+            label="Share capital amount"
+            value={
+              coMaker.share_capital_amount === null
+                ? "-"
+                : formatPeso(coMaker.share_capital_amount)
+            }
+          />
+        </DetailGrid>
+      ) : null}
     </div>
   );
 }
@@ -626,8 +690,8 @@ function DetailSection({
   children: ReactNode;
 }) {
   return (
-    <section className="rounded-xl border border-[#e1e8ef] bg-white p-4">
-      <div className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#8a99a8]">
+    <section className="rounded-xl border border-[#E2E8F0] bg-white p-4">
+      <div className="mb-3 flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#94A3B8]">
         {icon}
         {title}
       </div>
@@ -657,8 +721,8 @@ function DetailItem({
 }) {
   return (
     <div className={wide ? "sm:col-span-2" : undefined}>
-      <dt className="text-xs font-bold uppercase tracking-wider text-[#8a99a8]">{label}</dt>
-      <dd className="mt-1 break-words text-sm leading-6 text-[#344456]">{value}</dd>
+      <dt className="text-xs font-bold uppercase tracking-wider text-[#94A3B8]">{label}</dt>
+      <dd className="mt-1 break-words text-sm leading-6 text-[#334155]">{value}</dd>
     </div>
   );
 }

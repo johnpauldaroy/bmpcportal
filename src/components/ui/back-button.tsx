@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft } from "@/components/ui/icon";
 import { useRouter } from "next/navigation";
 
 export function BackButton({ href }: { href?: string }) {
@@ -18,14 +18,14 @@ export function BackButton({ href }: { href?: string }) {
     <button
       onClick={handleBack}
       className="mb-4 flex items-center gap-1.5 rounded-lg px-2 py-1.5 text-sm font-medium transition-colors"
-      style={{ color: "#5f6c7b", background: "transparent" }}
+      style={{ color: "#475569", background: "transparent" }}
       onMouseEnter={(e) => {
-        (e.currentTarget as HTMLElement).style.background = "#edf3f8";
-        (e.currentTarget as HTMLElement).style.color = "#10233f";
+        (e.currentTarget as HTMLElement).style.background = "#F1F5F9";
+        (e.currentTarget as HTMLElement).style.color = "#3673FC";
       }}
       onMouseLeave={(e) => {
         (e.currentTarget as HTMLElement).style.background = "transparent";
-        (e.currentTarget as HTMLElement).style.color = "#5f6c7b";
+        (e.currentTarget as HTMLElement).style.color = "#475569";
       }}
     >
       <ArrowLeft size={16} />

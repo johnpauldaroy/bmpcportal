@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckCircle2, Download, FileSpreadsheet, RotateCcw, Upload, XCircle } from "lucide-react";
+import { CheckCircle2, Download, FileSpreadsheet, RotateCcw, Upload, XCircle } from "@/components/ui/icon";
 import { useMemo, useState, type ChangeEvent } from "react";
 import { Button } from "@/components/ui/button";
 import { StatusBadge } from "@/components/ui/status-badge";
@@ -193,13 +193,13 @@ export function CsvImportPanel({ initialImports = [] }: { initialImports?: Impor
 
   return (
     <div className="grid gap-5">
-      <section className="grid gap-5 rounded-lg border border-[#d8e1ea] bg-white p-5 shadow-sm">
+      <section className="grid gap-5 rounded-xl border border-[#E2E8F0] bg-white p-5 md-elevation-1">
         <div className="grid gap-4 lg:grid-cols-[1fr_auto] lg:items-end">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <label className="grid gap-2 text-sm font-semibold text-[#344456]">
+            <label className="grid gap-2 text-sm font-semibold text-[#334155]">
               Snapshot type
               <select
-                className="min-h-10 rounded-md border border-[#cbd7e3] bg-white px-3 text-sm text-[#17263a]"
+                className="min-h-11 rounded-lg border border-[#CBD5E1] outline-none transition-colors focus:border-[#3673FC] focus:ring-2 focus:ring-[#3673FC]/20 bg-white px-3 text-sm text-[#1E293B]"
                 value={type}
                 onChange={(event) => setType(event.target.value as SnapshotType)}
               >
@@ -208,20 +208,20 @@ export function CsvImportPanel({ initialImports = [] }: { initialImports?: Impor
               </select>
             </label>
 
-            <label className="grid gap-2 text-sm font-semibold text-[#344456]">
+            <label className="grid gap-2 text-sm font-semibold text-[#334155]">
               Effective date
               <input
-                className="min-h-10 rounded-md border border-[#cbd7e3] bg-white px-3 text-sm text-[#17263a]"
+                className="min-h-11 rounded-lg border border-[#CBD5E1] outline-none transition-colors focus:border-[#3673FC] focus:ring-2 focus:ring-[#3673FC]/20 bg-white px-3 text-sm text-[#1E293B]"
                 type="date"
                 value={effectiveDate}
                 onChange={(event) => setEffectiveDate(event.target.value)}
               />
             </label>
 
-            <label className="grid gap-2 text-sm font-semibold text-[#344456]">
+            <label className="grid gap-2 text-sm font-semibold text-[#334155]">
               CSV file
               <input
-                className="min-h-10 rounded-md border border-[#cbd7e3] bg-white px-3 py-2 text-sm text-[#17263a]"
+                className="min-h-11 rounded-lg border border-[#CBD5E1] outline-none transition-colors focus:border-[#3673FC] focus:ring-2 focus:ring-[#3673FC]/20 bg-white px-3 py-2 text-sm text-[#1E293B]"
                 type="file"
                 accept=".csv,text/csv"
                 onChange={onFileChange}
@@ -236,23 +236,23 @@ export function CsvImportPanel({ initialImports = [] }: { initialImports?: Impor
         </div>
 
         {message ? (
-          <p className={`text-sm font-medium ${message.toLowerCase().includes("fail") || message.toLowerCase().includes("error") ? "text-[#b42318]" : "text-[#0b5d53]"}`}>
+          <p className={`text-sm font-medium ${message.toLowerCase().includes("fail") || message.toLowerCase().includes("error") ? "text-[#b42318]" : "text-[#1F52F1]"}`}>
             {message}
           </p>
         ) : null}
 
         {/* Template info + download */}
-        <div className="flex flex-col gap-3 rounded-xl border border-[#d8e1ea] bg-[#f8fafc] p-4 sm:flex-row sm:items-center sm:justify-between">
+        <div className="flex flex-col gap-3 rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] p-4 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex items-start gap-3">
-            <div className="grid size-9 shrink-0 place-items-center rounded-lg" style={{ background: "#e5f3ef", color: "#136f63" }}>
+            <div className="grid size-9 shrink-0 place-items-center rounded-lg" style={{ background: "#DAE7FF", color: "#3673FC" }}>
               <FileSpreadsheet size={18} />
             </div>
             <div>
-              <p className="text-sm font-semibold text-[#10233f]">CSV Format Requirements</p>
-              <p className="mt-0.5 text-xs leading-5 text-[#5f6c7b]">
-                Required columns: <code className="rounded bg-[#edf3f8] px-1 py-0.5 font-mono text-[#136f63]">member_number</code>,{" "}
-                <code className="rounded bg-[#edf3f8] px-1 py-0.5 font-mono text-[#136f63]">amount</code>,{" "}
-                <code className="rounded bg-[#edf3f8] px-1 py-0.5 font-mono text-[#136f63]">effective_date</code>.
+              <p className="text-sm font-semibold text-[#0F172A]">CSV Format Requirements</p>
+              <p className="mt-0.5 text-xs leading-5 text-[#475569]">
+                Required columns: <code className="rounded bg-[#F1F5F9] px-1 py-0.5 font-mono text-[#3673FC]">member_number</code>,{" "}
+                <code className="rounded bg-[#F1F5F9] px-1 py-0.5 font-mono text-[#3673FC]">amount</code>,{" "}
+                <code className="rounded bg-[#F1F5F9] px-1 py-0.5 font-mono text-[#3673FC]">effective_date</code>.
                 All row dates must match the selected effective date.
               </p>
             </div>
@@ -261,9 +261,9 @@ export function CsvImportPanel({ initialImports = [] }: { initialImports?: Impor
             type="button"
             onClick={() => downloadTemplate(type, effectiveDate)}
             className="flex shrink-0 items-center gap-2 rounded-lg border px-4 py-2 text-sm font-semibold transition-colors"
-            style={{ borderColor: "#136f63", color: "#136f63", background: "white" }}
+            style={{ borderColor: "#3673FC", color: "#3673FC", background: "white" }}
             onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.background = "#e5f3ef";
+              (e.currentTarget as HTMLElement).style.background = "#DAE7FF";
             }}
             onMouseLeave={(e) => {
               (e.currentTarget as HTMLElement).style.background = "white";
@@ -276,11 +276,11 @@ export function CsvImportPanel({ initialImports = [] }: { initialImports?: Impor
       </section>
 
       {preview ? (
-        <section className="grid gap-5 rounded-lg border border-[#d8e1ea] bg-white p-5 shadow-sm">
+        <section className="grid gap-5 rounded-xl border border-[#E2E8F0] bg-white p-5 md-elevation-1">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
-              <h2 className="text-base font-semibold text-[#10233f]">Import preview</h2>
-              <p className="mt-1 text-sm text-[#5f6c7b]">
+              <h2 className="text-base font-semibold text-[#0F172A]">Import preview</h2>
+              <p className="mt-1 text-sm text-[#475569]">
                 {snapshotTypeLabel[preview.import.type]} for {preview.import.effective_date}
               </p>
             </div>
@@ -298,9 +298,9 @@ export function CsvImportPanel({ initialImports = [] }: { initialImports?: Impor
             <StatusBadge>Total: {formatMoney(preview.summary.totalAmount)}</StatusBadge>
           </div>
 
-          <div className="overflow-x-auto rounded-md border border-[#e1e8ef]">
-            <table className="min-w-full divide-y divide-[#e1e8ef] text-left text-sm">
-              <thead className="bg-[#edf3f8] text-[#344456]">
+          <div className="overflow-x-auto rounded-md border border-[#E2E8F0]">
+            <table className="min-w-full divide-y divide-[#E2E8F0] text-left text-sm">
+              <thead className="bg-[#F1F5F9] text-[#334155]">
                 <tr>
                   <th className="px-3 py-2 font-semibold">Row</th>
                   <th className="px-3 py-2 font-semibold">Member number</th>
@@ -309,7 +309,7 @@ export function CsvImportPanel({ initialImports = [] }: { initialImports?: Impor
                   <th className="px-3 py-2 font-semibold">Validation</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-[#e1e8ef]">
+              <tbody className="divide-y divide-[#E2E8F0]">
                 {preview.previewRows.map((row) => (
                   <tr key={row.rowNumber}>
                     <td className="px-3 py-2">{row.rowNumber}</td>
@@ -349,18 +349,18 @@ export function CsvImportPanel({ initialImports = [] }: { initialImports?: Impor
         </section>
       ) : null}
 
-      <section className="grid gap-4 rounded-lg border border-[#d8e1ea] bg-white p-5 shadow-sm">
+      <section className="grid gap-4 rounded-xl border border-[#E2E8F0] bg-white p-5 md-elevation-1">
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <h2 className="text-base font-semibold text-[#10233f]">Batch log</h2>
+          <h2 className="text-base font-semibold text-[#0F172A]">Batch log</h2>
           <Button intent="secondary" onClick={() => loadImports()}>
             <RotateCcw aria-hidden size={18} />
             Refresh
           </Button>
         </div>
 
-        <div className="overflow-x-auto rounded-md border border-[#e1e8ef]">
-          <table className="min-w-full divide-y divide-[#e1e8ef] text-left text-sm">
-            <thead className="bg-[#edf3f8] text-[#344456]">
+        <div className="overflow-x-auto rounded-md border border-[#E2E8F0]">
+          <table className="min-w-full divide-y divide-[#E2E8F0] text-left text-sm">
+            <thead className="bg-[#F1F5F9] text-[#334155]">
               <tr>
                 <th className="px-3 py-2 font-semibold">Created</th>
                 <th className="px-3 py-2 font-semibold">Type</th>
@@ -370,7 +370,7 @@ export function CsvImportPanel({ initialImports = [] }: { initialImports?: Impor
                 <th className="px-3 py-2 font-semibold">Status</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#e1e8ef]">
+            <tbody className="divide-y divide-[#E2E8F0]">
               {imports.length > 0 ? (
                 imports.map((item) => (
                   <tr key={item.id}>
@@ -392,7 +392,7 @@ export function CsvImportPanel({ initialImports = [] }: { initialImports?: Impor
                 ))
               ) : (
                 <tr>
-                  <td className="px-3 py-6 text-center text-[#5f6c7b]" colSpan={6}>
+                  <td className="px-3 py-6 text-center text-[#475569]" colSpan={6}>
                     No import batches logged yet.
                   </td>
                 </tr>

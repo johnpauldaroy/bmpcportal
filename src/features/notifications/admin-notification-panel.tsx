@@ -1,6 +1,6 @@
 "use client";
 
-import { Send } from "lucide-react";
+import { Send } from "@/components/ui/icon";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { StatusBadge } from "@/components/ui/status-badge";
@@ -61,45 +61,45 @@ export function AdminNotificationPanel({
 
   return (
     <div className="grid gap-5">
-      <section className="grid gap-4 rounded-lg border border-[#d8e1ea] bg-white p-5 shadow-sm">
+      <section className="grid gap-4 rounded-xl border border-[#E2E8F0] bg-white p-5 md-elevation-1">
         <div className="grid gap-4 md:grid-cols-2">
-          <label className="grid gap-2 text-sm font-semibold text-[#344456]">
+          <label className="grid gap-2 text-sm font-semibold text-[#334155]">
             Member number
             <input
-              className="focus-ring min-h-10 rounded-md border border-[#cbd7e3] px-3"
+              className="focus-ring min-h-11 rounded-lg border border-[#CBD5E1] outline-none transition-colors focus:border-[#3673FC] focus:ring-2 focus:ring-[#3673FC]/20 px-3"
               value={memberNumber}
               onChange={(event) => setMemberNumber(event.target.value)}
             />
           </label>
-          <label className="grid gap-2 text-sm font-semibold text-[#344456]">
+          <label className="grid gap-2 text-sm font-semibold text-[#334155]">
             Title
             <input
-              className="focus-ring min-h-10 rounded-md border border-[#cbd7e3] px-3"
+              className="focus-ring min-h-11 rounded-lg border border-[#CBD5E1] outline-none transition-colors focus:border-[#3673FC] focus:ring-2 focus:ring-[#3673FC]/20 px-3"
               value={title}
               onChange={(event) => setTitle(event.target.value)}
             />
           </label>
         </div>
-        <label className="grid gap-2 text-sm font-semibold text-[#344456]">
+        <label className="grid gap-2 text-sm font-semibold text-[#334155]">
           Message
           <textarea
-            className="focus-ring min-h-24 rounded-md border border-[#cbd7e3] px-3 py-2"
+            className="focus-ring min-h-24 rounded-md border border-[#E2E8F0] px-3 py-2"
             value={body}
             onChange={(event) => setBody(event.target.value)}
           />
         </label>
-        {message ? <p className="text-sm font-medium text-[#344456]">{message}</p> : null}
+        {message ? <p className="text-sm font-medium text-[#334155]">{message}</p> : null}
         <Button className="w-fit" onClick={createNotification} disabled={isSending}>
           <Send aria-hidden size={18} />
           {isSending ? "Queueing..." : "Queue notification"}
         </Button>
       </section>
 
-      <section className="grid gap-4 rounded-lg border border-[#d8e1ea] bg-white p-5 shadow-sm">
-        <h2 className="text-base font-semibold text-[#10233f]">Recent notifications</h2>
-        <div className="overflow-x-auto rounded-md border border-[#e1e8ef]">
-          <table className="min-w-full divide-y divide-[#e1e8ef] text-left text-sm">
-            <thead className="bg-[#edf3f8] text-[#344456]">
+      <section className="grid gap-4 rounded-xl border border-[#E2E8F0] bg-white p-5 md-elevation-1">
+        <h2 className="text-base font-semibold text-[#0F172A]">Recent notifications</h2>
+        <div className="overflow-x-auto rounded-md border border-[#E2E8F0]">
+          <table className="min-w-full divide-y divide-[#E2E8F0] text-left text-sm">
+            <thead className="bg-[#F1F5F9] text-[#334155]">
               <tr>
                 <th className="px-3 py-2 font-semibold">Recipient</th>
                 <th className="px-3 py-2 font-semibold">Message</th>
@@ -107,21 +107,21 @@ export function AdminNotificationPanel({
                 <th className="px-3 py-2 font-semibold">Created</th>
               </tr>
             </thead>
-            <tbody className="divide-y divide-[#e1e8ef]">
+            <tbody className="divide-y divide-[#E2E8F0]">
               {rows.length > 0 ? (
                 rows.map((notification) => (
                   <tr key={notification.id}>
                     <td className="px-3 py-2">
-                      <p className="font-semibold text-[#10233f]">
+                      <p className="font-semibold text-[#0F172A]">
                         {notification.member?.full_name ?? "Member"}
                       </p>
-                      <p className="text-xs text-[#5f6c7b]">
+                      <p className="text-xs text-[#475569]">
                         {notification.member?.member_number ?? notification.member_id}
                       </p>
                     </td>
                     <td className="px-3 py-2">
-                      <p className="font-semibold text-[#10233f]">{notification.title}</p>
-                      <p className="text-xs text-[#5f6c7b]">{notification.body}</p>
+                      <p className="font-semibold text-[#0F172A]">{notification.title}</p>
+                      <p className="text-xs text-[#475569]">{notification.body}</p>
                     </td>
                     <td className="px-3 py-2">
                       <StatusBadge tone={statusTone(notification.status)}>
@@ -133,7 +133,7 @@ export function AdminNotificationPanel({
                 ))
               ) : (
                 <tr>
-                  <td className="px-3 py-6 text-center text-[#5f6c7b]" colSpan={4}>
+                  <td className="px-3 py-6 text-center text-[#475569]" colSpan={4}>
                     No notifications queued yet.
                   </td>
                 </tr>

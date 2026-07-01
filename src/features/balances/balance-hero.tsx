@@ -1,6 +1,6 @@
 "use client";
 
-import { Eye, EyeOff, Landmark, PiggyBank } from "lucide-react";
+import { Eye, EyeOff, Landmark, PiggyBank } from "@/components/ui/icon";
 import { useState } from "react";
 
 type BalanceRow = {
@@ -23,7 +23,7 @@ export function BalanceHero({ rows }: BalanceHeroProps) {
   const [hidden, setHidden] = useState(false);
 
   return (
-    <section className="rounded-2xl bg-gradient-to-br from-[#10233f] to-[#136f63] p-6 text-white sm:p-8">
+    <section className="rounded-2xl bg-gradient-to-br from-[#1B308D] to-[#3673FC] p-6 text-white sm:p-8">
       {/* Top row */}
       <div className="flex items-start justify-between gap-4">
         <div>

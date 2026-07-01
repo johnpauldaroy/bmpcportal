@@ -9,10 +9,11 @@ import {
   Megaphone,
   PiggyBank,
   ScrollText,
+  Settings,
   Shield,
   Upload,
   Users
-} from "lucide-react";
+} from "@/components/ui/icon";
 
 export const memberNavigation = [
   { href: "/member/balances", label: "Balances", icon: PiggyBank },
@@ -32,5 +33,6 @@ export const adminNavigation = [
   { href: "/admin/loans", label: "Loan reviews", icon: ScrollText },
   { href: "/admin/announcements", label: "Announcements", icon: Megaphone },
   { href: "/admin/knowledge-base", label: "Knowledge base", icon: Bot },
-  { href: "/admin/notifications", label: "Notifications", icon: Bell }
+  { href: "/admin/notifications", label: "Notifications", icon: Bell },
+  { href: "/admin/settings", label: "Settings", icon: Settings }
 ];

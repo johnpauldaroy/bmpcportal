@@ -66,7 +66,7 @@ export async function POST(
   try {
     const { data: application } = await auth.admin
       .from("loan_applications")
-      .select("application_number, member_id")
+      .select("application_number, member_id, applicant_email")
       .eq("id", loanId)
       .maybeSingle();
 
@@ -77,16 +77,30 @@ export async function POST(
         .eq("id", application.member_id)
         .maybeSingle();
 
-      if (member?.email) {
+      // Prefer the email the applicant entered on the application; fall back to
+      // their profile email. CSV-imported members often have no profile email,
+      // so relying only on the profile silently skipped notifications.
+      const recipient = application.applicant_email || member?.email;
+
+      if (recipient) {
         const { NEXT_PUBLIC_APP_URL } = getServerEnv();
         const { subject, html } = loanStatusEmail({
-          memberName: member.full_name ?? "",
+          memberName: member?.full_name ?? "",
           applicationNumber: application.application_number,
           statusLabel: loanStatusLabel[parsed.data.status],
           note: parsed.data.note,
           url: `${NEXT_PUBLIC_APP_URL.replace(/\/$/, "")}/member/loans`
         });
-        await sendEmail({ to: member.email, subject, html });
+        const result = await sendEmail({ to: recipient, subject, html });
+        if (!result.sent) {
+          console.warn(
+            `[loan-status] email to ${recipient} not sent (reason: ${result.reason})`
+          );
+        }
+      } else {
+        console.warn(
+          `[loan-status] no email on file for application ${application.application_number}; notification skipped`
+        );
       }
     }
   } catch (emailError) {

@@ -23,7 +23,14 @@ const serverEnvSchema = publicEnvSchema.extend({
     .transform((value) => value === "true"),
   SMTP_USER: z.string().min(1).optional(),
   SMTP_PASSWORD: z.string().min(1).optional(),
-  SMTP_FROM: z.string().min(1).optional()
+  SMTP_FROM: z.string().min(1).optional(),
+  // Semaphore SMS (Philippine SMS gateway). When SEMAPHORE_API_KEY is unset, the
+  // SMS sender logs instead of sending so local/dev keeps working without credits.
+  SEMAPHORE_API_KEY: z.string().min(1).optional(),
+  // Registered sender name (e.g. "BMPC"). Must be approved in the Semaphore
+  // dashboard; falls back to Semaphore's shared "SEMAPHORE" sender if unset.
+  SEMAPHORE_SENDER_NAME: z.string().min(1).optional(),
+  SEMAPHORE_BASE_URL: z.string().url().default("https://api.semaphore.co/api/v4")
 });
 
 export function getPublicEnv() {
@@ -51,6 +58,9 @@ export function getServerEnv() {
     SMTP_SECURE: process.env.SMTP_SECURE,
     SMTP_USER: process.env.SMTP_USER,
     SMTP_PASSWORD: process.env.SMTP_PASSWORD,
-    SMTP_FROM: process.env.SMTP_FROM
+    SMTP_FROM: process.env.SMTP_FROM,
+    SEMAPHORE_API_KEY: process.env.SEMAPHORE_API_KEY,
+    SEMAPHORE_SENDER_NAME: process.env.SEMAPHORE_SENDER_NAME,
+    SEMAPHORE_BASE_URL: process.env.SEMAPHORE_BASE_URL
   });
 }

@@ -1,0 +1,36 @@
+{
+  "_comment": "Coordinates measured against public/templates/authority-to-deduct.pdf (612x468). Left column = principal borrower, right column = co-makers. pdf-lib origin is bottom-left.",
+  "pageSize": [612, 468],
+  "borrower": {
+    "amountWords": [95, 346],
+    "amount": [300, 346],
+    "deductAmountWords": [50, 312],
+    "deductAmount": [245, 312],
+    "firstPayment": [230, 274],
+    "loanAmortization": [195, 240],
+    "interest": [195, 229],
+    "fines": [195, 218],
+    "capitalBuildUp": [195, 207],
+    "savingsDeposit": [195, 195],
+    "total": [195, 184],
+    "doneDay": [355, 101],
+    "doneMonth": [170, 101],
+    "doneAt": [70, 89]
+  },
+  "coMaker": {
+    "grantedTo": [460, 358],
+    "amountWords": [395, 347],
+    "amount": [468, 336],
+    "deductAmountWords": [320, 313],
+    "deductAmount": [505, 302],
+    "loanAmortizationOf": [395, 290],
+    "doneDay": [365, 192],
+    "doneMonth": [490, 192],
+    "doneAt": [341, 180]
+  },
+  "signatures": {
+    "borrower": [185, 67],
+    "coMaker1": [460, 160],
+    "coMaker2": [460, 117]
+  }
+}

@@ -5,11 +5,15 @@ import { cn } from "@/lib/utils";
 
 type ButtonIntent = "primary" | "secondary" | "danger";
 
+// Material-style buttons: full-pill shape, label tracking, state layer + press feedback.
 const intentClass: Record<ButtonIntent, string> = {
-  primary: "bg-[#136f63] text-white hover:bg-[#0b4f47]",
-  secondary: "border border-[#cbd7e3] bg-white text-[#17263a] hover:bg-[#edf3f8]",
-  danger: "bg-[#b42318] text-white hover:bg-[#8f1f16]"
+  primary: "bg-[#3673FC] text-white hover:bg-[#1F52F1] md-elevation-1 hover:md-elevation-2",
+  secondary: "border border-[#E2E8F0] bg-white text-[#1E293B] hover:bg-[#F1F5F9]",
+  danger: "bg-[#b42318] text-white hover:bg-[#8f1f16] md-elevation-1 hover:md-elevation-2"
 };
+
+const baseButton =
+  "focus-ring md-interactive md-state-layer inline-flex min-h-10 items-center justify-center gap-2 rounded-full px-6 py-2.5 text-sm font-medium tracking-[0.02em] disabled:pointer-events-none disabled:opacity-50";
 
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   intent?: ButtonIntent;
@@ -24,11 +28,7 @@ export function Button({
   return (
     <button
       type={type}
-      className={cn(
-        "focus-ring inline-flex min-h-10 items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-semibold transition",
-        intentClass[intent],
-        className
-      )}
+      className={cn(baseButton, intentClass[intent], className)}
       {...props}
     />
   );
@@ -49,11 +49,7 @@ export function ButtonLink({
 }: ButtonLinkProps) {
   return (
     <Link
-      className={cn(
-        "focus-ring inline-flex min-h-10 items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-semibold transition",
-        intentClass[intent],
-        className
-      )}
+      className={cn(baseButton, intentClass[intent], className)}
       {...props}
     >
       {children}

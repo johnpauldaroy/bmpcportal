@@ -9,7 +9,7 @@
 - `react-hook-form`, `@hookform/resolvers`: member/admin forms with typed validation.
 - `papaparse`: CSV parsing for client preview and later server-side import validation.
 - `qrcode`: digital membership ID and verification QR generation.
-- `lucide-react`: consistent icon system.
+- Material Symbols (Rounded) via `@/components/ui/icon`: consistent icon system (Material Design). `lucide-react` is no longer imported in app code.
 - `clsx`, `tailwind-merge`: safe Tailwind class composition.
 - `date-fns`: date formatting and expiry/reminder calculations.
 

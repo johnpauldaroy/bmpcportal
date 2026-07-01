@@ -33,7 +33,7 @@ export function SignaturePad({
     ctx.lineWidth = 2;
     ctx.lineCap = "round";
     ctx.lineJoin = "round";
-    ctx.strokeStyle = "#17263a";
+    ctx.strokeStyle = "#1E293B";
   }, []);
 
   function pointerPos(event: React.PointerEvent<HTMLCanvasElement>) {
@@ -99,14 +99,14 @@ export function SignaturePad({
     <div className="grid gap-2">
       <canvas
         ref={canvasRef}
-        className="h-40 w-full touch-none rounded-md border border-dashed border-[#cbd7e3] bg-white"
+        className="h-40 w-full touch-none rounded-md border border-dashed border-[#E2E8F0] bg-white"
         onPointerDown={startStroke}
         onPointerMove={moveStroke}
         onPointerUp={endStroke}
         onPointerLeave={endStroke}
       />
       <div className="flex items-center justify-between">
-        <span className="text-xs font-normal text-[#5f6c7b]">
+        <span className="text-xs font-normal text-[#475569]">
           {hasDrawing
             ? fileName
               ? `Signed: ${fileName}`

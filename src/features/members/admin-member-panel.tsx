@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckCircle2, XCircle } from "lucide-react";
+import { CheckCircle2, XCircle } from "@/components/ui/icon";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { StatusBadge } from "@/components/ui/status-badge";
@@ -62,11 +62,11 @@ export function AdminMemberPanel({ members }: { members: MemberProfile[] }) {
   }
 
   return (
-    <section className="grid gap-4 rounded-lg border border-[#d8e1ea] bg-white p-5 shadow-sm">
-      {message ? <p className="text-sm font-medium text-[#344456]">{message}</p> : null}
-      <div className="overflow-x-auto rounded-md border border-[#e1e8ef]">
-        <table className="min-w-full divide-y divide-[#e1e8ef] text-left text-sm">
-          <thead className="bg-[#edf3f8] text-[#344456]">
+    <section className="grid gap-4 rounded-xl border border-[#E2E8F0] bg-white p-5 md-elevation-1">
+      {message ? <p className="text-sm font-medium text-[#334155]">{message}</p> : null}
+      <div className="overflow-x-auto rounded-md border border-[#E2E8F0]">
+        <table className="min-w-full divide-y divide-[#E2E8F0] text-left text-sm">
+          <thead className="bg-[#F1F5F9] text-[#334155]">
             <tr>
               <th className="px-3 py-2 font-semibold">Member</th>
               <th className="px-3 py-2 font-semibold">Member number</th>
@@ -75,13 +75,13 @@ export function AdminMemberPanel({ members }: { members: MemberProfile[] }) {
               <th className="px-3 py-2 font-semibold">Actions</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-[#e1e8ef]">
+          <tbody className="divide-y divide-[#E2E8F0]">
             {rows.length > 0 ? (
               rows.map((member) => (
                 <tr key={member.id}>
                   <td className="px-3 py-2">
-                    <p className="font-semibold text-[#10233f]">{member.full_name}</p>
-                    <p className="text-xs text-[#5f6c7b]">{member.email}</p>
+                    <p className="font-semibold text-[#0F172A]">{member.full_name}</p>
+                    <p className="text-xs text-[#475569]">{member.email}</p>
                   </td>
                   <td className="px-3 py-2">{member.member_number ?? "Not set"}</td>
                   <td className="px-3 py-2">{member.phone ?? "Not set"}</td>
@@ -111,7 +111,7 @@ export function AdminMemberPanel({ members }: { members: MemberProfile[] }) {
               ))
             ) : (
               <tr>
-                <td className="px-3 py-6 text-center text-[#5f6c7b]" colSpan={5}>
+                <td className="px-3 py-6 text-center text-[#475569]" colSpan={5}>
                   No member records found.
                 </td>
               </tr>

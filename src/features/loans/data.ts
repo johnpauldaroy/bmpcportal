@@ -9,6 +9,9 @@ export type LoanCoMaker = Database["public"]["Tables"]["loan_co_makers"]["Row"];
 export type LoanRealProperty = Database["public"]["Tables"]["loan_real_properties"]["Row"];
 export type LoanStatusHistory = Database["public"]["Tables"]["loan_status_history"]["Row"];
 
+export type LoanAgreement = Database["public"]["Tables"]["loan_agreements"]["Row"];
+export type { LoanAgreementStatus } from "@/types/database";
+
 export type LoanApplicationWithDetails = LoanApplication & {
   product: LoanProduct | null;
   branch: Branch | null;
@@ -73,6 +76,61 @@ export async function getMemberLoanApplications() {
     .order("created_at", { ascending: false });
 
   return hydrateLoanApplications(applications ?? []);
+}
+
+// Member-scoped single application fetch. RLS restricts the rows to the signed-in
+// member, and we additionally filter by member_id so it can never return another
+// member's application even if RLS were misconfigured.
+export async function getMemberLoanApplication(applicationId: string) {
+  const supabase = await createClient();
+  const {
+    data: { user }
+  } = await supabase.auth.getUser();
+  if (!user) return null;
+
+  const { data: application } = await supabase
+    .from("loan_applications")
+    .select("*")
+    .eq("id", applicationId)
+    .eq("member_id", user.id)
+    .maybeSingle();
+
+  if (!application) return null;
+  const [hydrated] = await hydrateLoanApplications([application]);
+  return hydrated ?? null;
+}
+
+// Agreement for an application (member-scoped; RLS limits to own application).
+export async function getMemberLoanAgreement(applicationId: string) {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("loan_agreements")
+    .select("*")
+    .eq("loan_application_id", applicationId)
+    .maybeSingle();
+  return (data as LoanAgreement | null) ?? null;
+}
+
+// All agreements for the signed-in member's applications (RLS-scoped).
+export async function getMemberLoanAgreements() {
+  const supabase = await createClient();
+  const {
+    data: { user }
+  } = await supabase.auth.getUser();
+  if (!user) return [] as LoanAgreement[];
+
+  const { data } = await supabase.from("loan_agreements").select("*");
+  return (data as LoanAgreement[] | null) ?? [];
+}
+
+export async function getAdminLoanAgreement(applicationId: string) {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("loan_agreements")
+    .select("*")
+    .eq("loan_application_id", applicationId)
+    .maybeSingle();
+  return (data as LoanAgreement | null) ?? null;
 }
 
 export async function getAdminLoanApplications() {

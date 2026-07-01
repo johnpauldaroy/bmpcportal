@@ -18,8 +18,8 @@ export function PageHeader({ title, description, status, backHref, showBack = tr
           {status}
         </StatusBadge>
       ) : null}
-      <h1 className="text-2xl font-semibold text-[#10233f]">{title}</h1>
-      <p className="mt-2 max-w-3xl text-sm leading-6 text-[#5f6c7b]">{description}</p>
+      <h1 className="text-2xl font-semibold text-[#0F172A]">{title}</h1>
+      <p className="mt-2 max-w-3xl text-sm leading-6 text-[#475569]">{description}</p>
     </header>
   );
 }

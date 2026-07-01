@@ -45,37 +45,37 @@ export default async function InsurancePage() {
             return (
               <article
                 key={record.id}
-                className="rounded-lg border border-[#d8e1ea] bg-white p-5 shadow-sm"
+                className="rounded-xl border border-[#E2E8F0] bg-white p-5 md-elevation-1"
               >
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div>
                     <StatusBadge tone={statusTone(record.status)}>{record.status}</StatusBadge>
-                    <h2 className="mt-3 text-lg font-semibold text-[#10233f]">
+                    <h2 className="mt-3 text-lg font-semibold text-[#0F172A]">
                       {product?.name ?? record.provider ?? "Insurance record"}
                     </h2>
-                    <p className="mt-1 text-sm text-[#5f6c7b]">
+                    <p className="mt-1 text-sm text-[#475569]">
                       Policy: {record.policy_number ?? "Not set"}
                     </p>
                   </div>
                   <div className="text-left sm:text-right">
-                    <p className="text-sm font-semibold text-[#344456]">Coverage</p>
-                    <p className="text-lg font-semibold text-[#10233f]">
+                    <p className="text-sm font-semibold text-[#334155]">Coverage</p>
+                    <p className="text-lg font-semibold text-[#0F172A]">
                       {formatPeso(record.coverage_amount)}
                     </p>
                   </div>
                 </div>
-                <dl className="mt-4 grid gap-3 rounded-md border border-[#e1e8ef] bg-[#f8fafc] p-3 text-sm sm:grid-cols-3">
+                <dl className="mt-4 grid gap-3 rounded-md border border-[#E2E8F0] bg-[#F8FAFC] p-3 text-sm sm:grid-cols-3">
                   <div>
-                    <dt className="font-semibold text-[#344456]">Effective</dt>
-                    <dd className="mt-1 text-[#5f6c7b]">{formatDate(record.effective_date)}</dd>
+                    <dt className="font-semibold text-[#334155]">Effective</dt>
+                    <dd className="mt-1 text-[#475569]">{formatDate(record.effective_date)}</dd>
                   </div>
                   <div>
-                    <dt className="font-semibold text-[#344456]">Expires</dt>
-                    <dd className="mt-1 text-[#5f6c7b]">{formatDate(record.expiry_date)}</dd>
+                    <dt className="font-semibold text-[#334155]">Expires</dt>
+                    <dd className="mt-1 text-[#475569]">{formatDate(record.expiry_date)}</dd>
                   </div>
                   <div>
-                    <dt className="font-semibold text-[#344456]">Premium</dt>
-                    <dd className="mt-1 text-[#5f6c7b]">{formatPeso(record.premium_amount)}</dd>
+                    <dt className="font-semibold text-[#334155]">Premium</dt>
+                    <dd className="mt-1 text-[#475569]">{formatPeso(record.premium_amount)}</dd>
                   </div>
                 </dl>
               </article>

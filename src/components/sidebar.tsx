@@ -19,13 +19,14 @@ import {
   Menu,
   PiggyBank,
   ScrollText,
+  Settings,
   Shield,
   ShieldCheck,
   Upload,
   Users,
   X
-} from "lucide-react";
-import type { LucideIcon } from "lucide-react";
+} from "@/components/ui/icon";
+import type { LucideIcon } from "@/components/ui/icon";
 import { createClient } from "@/lib/supabase/browser";
 
 type NavItem = { href: string; label: string; icon: LucideIcon };
@@ -50,7 +51,8 @@ const adminNav: NavItem[] = [
   { href: "/admin/loans", label: "Loan Reviews", icon: ScrollText },
   { href: "/admin/announcements", label: "Announcements", icon: Megaphone },
   { href: "/admin/knowledge-base", label: "Knowledge Base", icon: Bot },
-  { href: "/admin/notifications", label: "Notifications", icon: Bell }
+  { href: "/admin/notifications", label: "Notifications", icon: Bell },
+  { href: "/admin/settings", label: "Settings", icon: Settings }
 ];
 
 type SidebarProps = {
@@ -80,18 +82,19 @@ function NavItem({
         alignItems: "center",
         gap: collapsed ? 0 : "10px",
         justifyContent: collapsed ? "center" : "flex-start",
-        padding: collapsed ? "10px 0" : "10px 12px",
-        borderRadius: "10px",
+        padding: collapsed ? "10px 0" : "10px 16px",
+        borderRadius: "9999px",
         fontSize: "14px",
         fontWeight: 500,
+        letterSpacing: "0.01em",
         textDecoration: "none",
-        transition: "background 0.15s",
-        background: active ? "#d99b2b" : "transparent",
+        transition: "background 0.2s cubic-bezier(0.2, 0, 0, 1)",
+        background: active ? "#1F52F1" : "transparent",
         color: active ? "#ffffff" : "#c8daea"
       }}
       onMouseEnter={(e) => {
         if (!active) {
-          (e.currentTarget as HTMLElement).style.background = "#1e3a5f";
+          (e.currentTarget as HTMLElement).style.background = "#1933B4";
           (e.currentTarget as HTMLElement).style.color = "#ffffff";
         }
       }}
@@ -102,7 +105,7 @@ function NavItem({
         }
       }}
     >
-      <item.icon size={18} style={{ flexShrink: 0, color: "inherit" }} />
+      <item.icon size={20} style={{ flexShrink: 0, color: "inherit" }} />
       {!collapsed && <span style={{ color: "inherit" }}>{item.label}</span>}
     </Link>
   );
@@ -132,11 +135,11 @@ export function Sidebar({ variant, collapsed, onCollapse }: SidebarProps) {
     <>
       {/* ── Mobile top bar ── */}
       <header
-        style={{ background: "#0f2744", borderBottom: "1px solid rgba(255,255,255,0.08)" }}
+        style={{ background: "#1B308D", borderBottom: "1px solid rgba(255,255,255,0.08)" }}
         className="sticky top-0 z-40 flex items-center justify-between px-4 py-3 lg:hidden"
       >
         <Link href={logoHref} className="flex items-center gap-3" style={{ textDecoration: "none" }}>
-          <span className="grid size-9 shrink-0 place-items-center rounded-xl shadow-md" style={{ background: "#d99b2b", color: "#fff" }}>
+          <span className="grid size-9 shrink-0 place-items-center rounded-xl shadow-md" style={{ background: "#1F52F1", color: "#fff" }}>
             <ShieldCheck size={19} />
           </span>
           <span>
@@ -168,11 +171,11 @@ export function Sidebar({ variant, collapsed, onCollapse }: SidebarProps) {
         className={`fixed left-0 top-0 z-50 flex h-full w-64 flex-col shadow-2xl transition-transform duration-300 lg:hidden ${
           mobileOpen ? "translate-x-0" : "-translate-x-full"
         }`}
-        style={{ background: "#0f2744" }}
+        style={{ background: "#1B308D" }}
       >
         <div className="flex items-center justify-between px-4 py-4" style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}>
           <Link href={logoHref} className="flex items-center gap-3" style={{ textDecoration: "none" }} onClick={() => setMobileOpen(false)}>
-            <span className="grid size-9 shrink-0 place-items-center rounded-xl shadow-md" style={{ background: "#d99b2b", color: "#fff" }}>
+            <span className="grid size-9 shrink-0 place-items-center rounded-xl shadow-md" style={{ background: "#1F52F1", color: "#fff" }}>
               <ShieldCheck size={19} />
             </span>
             <span>
@@ -222,7 +225,7 @@ export function Sidebar({ variant, collapsed, onCollapse }: SidebarProps) {
         className={`hidden lg:flex flex-col fixed left-0 top-0 h-full shadow-xl transition-all duration-300 z-30 ${
           collapsed ? "w-[68px]" : "w-60"
         }`}
-        style={{ background: "#0f2744", borderRight: "1px solid rgba(255,255,255,0.05)" }}
+        style={{ background: "#1B308D", borderRight: "1px solid rgba(255,255,255,0.05)" }}
       >
         {/* Logo */}
         <div
@@ -230,7 +233,7 @@ export function Sidebar({ variant, collapsed, onCollapse }: SidebarProps) {
           style={{ borderBottom: "1px solid rgba(255,255,255,0.08)" }}
         >
           <Link href={logoHref} className="flex items-center gap-3 min-w-0" style={{ textDecoration: "none" }}>
-            <span className="grid size-9 shrink-0 place-items-center rounded-xl shadow-md" style={{ background: "#d99b2b", color: "#fff" }}>
+            <span className="grid size-9 shrink-0 place-items-center rounded-xl shadow-md" style={{ background: "#1F52F1", color: "#fff" }}>
               <ShieldCheck size={19} />
             </span>
             {!collapsed && (
@@ -278,7 +281,7 @@ export function Sidebar({ variant, collapsed, onCollapse }: SidebarProps) {
         <button
           onClick={() => onCollapse(!collapsed)}
           className="absolute -right-3.5 top-[72px] grid size-7 place-items-center rounded-full shadow-lg transition-colors"
-          style={{ background: "#0f2744", border: "1px solid #1e3a5f", color: "#c8daea" }}
+          style={{ background: "#1B308D", border: "1px solid #1933B4", color: "#c8daea" }}
           aria-label={collapsed ? "Expand sidebar" : "Collapse sidebar"}
         >
           {collapsed ? <ChevronRight size={14} /> : <ChevronLeft size={14} />}

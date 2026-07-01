@@ -1,6 +1,6 @@
 "use client";
 
-import { Send } from "lucide-react";
+import { Send } from "@/components/ui/icon";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 
@@ -43,10 +43,10 @@ export function AssistantPanel() {
   }
 
   return (
-    <section className="rounded-lg border border-[#d8e1ea] bg-white shadow-sm">
+    <section className="rounded-xl border border-[#E2E8F0] bg-white md-elevation-1">
       <div className="min-h-[280px] space-y-3 p-4">
         {messages.length === 0 ? (
-          <p className="text-sm leading-6 text-[#5f6c7b]">
+          <p className="text-sm leading-6 text-[#475569]">
             Ask a question about BMPC policies, services, or uploaded documents.
           </p>
         ) : (
@@ -55,19 +55,19 @@ export function AssistantPanel() {
               key={`${item.role}-${index}`}
               className={
                 item.role === "user"
-                  ? "ml-auto max-w-[85%] rounded-lg bg-[#136f63] p-3 text-sm leading-6 text-white"
-                  : "mr-auto max-w-[85%] rounded-lg bg-[#edf3f8] p-3 text-sm leading-6 text-[#10233f]"
+                  ? "ml-auto max-w-[85%] rounded-lg bg-[#3673FC] p-3 text-sm leading-6 text-white"
+                  : "mr-auto max-w-[85%] rounded-lg bg-[#F1F5F9] p-3 text-sm leading-6 text-[#0F172A]"
               }
             >
               {item.content}
             </div>
           ))
         )}
-        {isLoading ? <p className="text-sm text-[#5f6c7b]">Checking knowledge base...</p> : null}
+        {isLoading ? <p className="text-sm text-[#475569]">Checking knowledge base...</p> : null}
       </div>
-      <form className="flex gap-2 border-t border-[#d8e1ea] p-3" onSubmit={submit}>
+      <form className="flex gap-2 border-t border-[#E2E8F0] p-3" onSubmit={submit}>
         <input
-          className="focus-ring min-h-11 flex-1 rounded-md border border-[#cbd7e3] px-3 text-sm"
+          className="focus-ring min-h-11 flex-1 rounded-md border border-[#E2E8F0] px-3 text-sm"
           value={message}
           onChange={(event) => setMessage(event.target.value)}
           placeholder="Ask from BMPC documents"

@@ -1,0 +1,19 @@
+{
+  "_comment": "Coordinates measured against public/templates/pledge-of-deposits.pdf (612x468). pdf-lib origin is bottom-left.",
+  "pageSize": [612, 468],
+  "fields": {
+    "noteDate": [248, 354],
+    "amountWords": [40, 342],
+    "amount": [383, 342],
+    "authorityAmountWords": [55, 106],
+    "authorityAmount": [365, 106]
+  },
+  "signatures": {
+    "maker": [226, 254],
+    "coMaker1": [62, 220],
+    "coMaker2": [386, 220],
+    "coMaker3": [62, 171],
+    "coMaker4": [386, 171],
+    "signature": [400, 73]
+  }
+}

@@ -46,38 +46,38 @@ export default async function DigitalIdPage() {
         description="Digital IDs will use signed member data and a QR verification endpoint."
       />
       {profile && membershipId && qrDataUrl ? (
-        <section className="grid gap-5 rounded-xl border border-[#d8e1ea] bg-white p-5 shadow-sm md:grid-cols-[1fr_auto]">
+        <section className="grid gap-5 rounded-xl border border-[#E2E8F0] bg-white p-5 shadow-sm md:grid-cols-[1fr_auto]">
           <div>
             <StatusBadge tone={statusTone(membershipId.status)}>{membershipId.status}</StatusBadge>
-            <h2 className="mt-4 text-2xl font-semibold text-[#10233f]">
+            <h2 className="mt-4 text-2xl font-semibold text-[#0F172A]">
               {profile.full_name}
             </h2>
             <dl className="mt-4 grid gap-3 text-sm sm:grid-cols-2">
               <div>
-                <dt className="font-semibold text-[#344456]">Member number</dt>
-                <dd className="mt-1 text-[#5f6c7b]">
+                <dt className="font-semibold text-[#334155]">Member number</dt>
+                <dd className="mt-1 text-[#475569]">
                   {profile.member_number ?? "Not set"}
                 </dd>
               </div>
               <div>
-                <dt className="font-semibold text-[#344456]">Membership date</dt>
-                <dd className="mt-1 text-[#5f6c7b]">
+                <dt className="font-semibold text-[#334155]">Membership date</dt>
+                <dd className="mt-1 text-[#475569]">
                   {formatDate(memberProfile?.membership_date ?? null)}
                 </dd>
               </div>
               <div>
-                <dt className="font-semibold text-[#344456]">Issued</dt>
-                <dd className="mt-1 text-[#5f6c7b]">{formatDate(membershipId.issued_at)}</dd>
+                <dt className="font-semibold text-[#334155]">Issued</dt>
+                <dd className="mt-1 text-[#475569]">{formatDate(membershipId.issued_at)}</dd>
               </div>
               <div>
-                <dt className="font-semibold text-[#344456]">Verification token</dt>
-                <dd className="mt-1 font-mono text-xs text-[#5f6c7b]">
+                <dt className="font-semibold text-[#334155]">Verification token</dt>
+                <dd className="mt-1 font-mono text-xs text-[#475569]">
                   {membershipId.qr_token.slice(0, 12)}...
                 </dd>
               </div>
             </dl>
           </div>
-          <div className="rounded-xl border border-[#e1e8ef] bg-[#f8fafc] p-4 text-center">
+          <div className="rounded-xl border border-[#E2E8F0] bg-[#F8FAFC] p-4 text-center">
             {/* Data URL is generated server-side for the member's private QR token. */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -85,7 +85,7 @@ export default async function DigitalIdPage() {
               className="mx-auto size-60"
               src={qrDataUrl}
             />
-            <p className="mt-2 text-xs text-[#5f6c7b]">
+            <p className="mt-2 text-xs text-[#475569]">
               Scan to verify issued membership status.
             </p>
           </div>

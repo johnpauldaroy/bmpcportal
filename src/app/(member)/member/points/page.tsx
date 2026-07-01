@@ -45,31 +45,31 @@ export default async function PointsPage() {
       />
       <div className="grid gap-6">
         <section className="grid gap-4">
-          <h2 className="text-base font-semibold text-[#10233f]">Point ledger</h2>
+          <h2 className="text-base font-semibold text-[#0F172A]">Point ledger</h2>
           {ledger && ledger.length > 0 ? (
             ledger.map((entry) => (
               <article
                 key={entry.id}
-                className="rounded-lg border border-[#d8e1ea] bg-white p-4 shadow-sm"
+                className="rounded-xl border border-[#E2E8F0] bg-white p-4 md-elevation-1"
               >
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div>
                     <StatusBadge tone={entry.points > 0 ? "success" : "warning"}>
                       {entry.entry_type}
                     </StatusBadge>
-                    <h3 className="mt-3 text-base font-semibold text-[#10233f]">
+                    <h3 className="mt-3 text-base font-semibold text-[#0F172A]">
                       {entry.reason}
                     </h3>
-                    <p className="mt-1 text-sm text-[#5f6c7b]">
+                    <p className="mt-1 text-sm text-[#475569]">
                       {formatDateTime(entry.created_at)}
                     </p>
                   </div>
                   <div className="text-left sm:text-right">
-                    <p className="text-lg font-semibold text-[#10233f]">
+                    <p className="text-lg font-semibold text-[#0F172A]">
                       {entry.points > 0 ? "+" : ""}
                       {entry.points}
                     </p>
-                    <p className="text-xs text-[#5f6c7b]">
+                    <p className="text-xs text-[#475569]">
                       Balance after: {entry.balance_after ?? "Not set"}
                     </p>
                   </div>
@@ -85,19 +85,19 @@ export default async function PointsPage() {
         </section>
 
         <section className="grid gap-4">
-          <h2 className="text-base font-semibold text-[#10233f]">Available rewards</h2>
+          <h2 className="text-base font-semibold text-[#0F172A]">Available rewards</h2>
           {rewards && rewards.length > 0 ? (
             <div className="grid gap-4 md:grid-cols-2">
               {rewards.map((reward) => (
                 <article
                   key={reward.id}
-                  className="rounded-lg border border-[#d8e1ea] bg-white p-4 shadow-sm"
+                  className="rounded-xl border border-[#E2E8F0] bg-white p-4 md-elevation-1"
                 >
-                  <h3 className="text-base font-semibold text-[#10233f]">{reward.name}</h3>
-                  <p className="mt-1 text-sm text-[#5f6c7b]">
+                  <h3 className="text-base font-semibold text-[#0F172A]">{reward.name}</h3>
+                  <p className="mt-1 text-sm text-[#475569]">
                     {reward.description ?? "No description provided."}
                   </p>
-                  <p className="mt-3 text-sm font-semibold text-[#136f63]">
+                  <p className="mt-3 text-sm font-semibold text-[#3673FC]">
                     {reward.points_cost} points
                   </p>
                 </article>
@@ -112,19 +112,19 @@ export default async function PointsPage() {
         </section>
 
         <section className="grid gap-4">
-          <h2 className="text-base font-semibold text-[#10233f]">Redemptions</h2>
+          <h2 className="text-base font-semibold text-[#0F172A]">Redemptions</h2>
           {redemptions && redemptions.length > 0 ? (
             redemptions.map((redemption) => (
               <article
                 key={redemption.id}
-                className="rounded-lg border border-[#d8e1ea] bg-white p-4 shadow-sm"
+                className="rounded-xl border border-[#E2E8F0] bg-white p-4 md-elevation-1"
               >
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <div>
-                    <h3 className="text-base font-semibold text-[#10233f]">
+                    <h3 className="text-base font-semibold text-[#0F172A]">
                       {redemption.redemption_number}
                     </h3>
-                    <p className="mt-1 text-sm text-[#5f6c7b]">
+                    <p className="mt-1 text-sm text-[#475569]">
                       Requested {formatDateTime(redemption.requested_at)}
                     </p>
                   </div>
